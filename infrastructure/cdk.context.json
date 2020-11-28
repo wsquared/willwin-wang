@@ -1,0 +1,10 @@
+{
+  "hosted-zone:account=864141050364:domainName=willw-test.sandbox.digio.com.au:region=ap-southeast-2": {
+    "Id": "/hostedzone/Z10359913Q2E2R2DH96JH",
+    "Name": "willw-test.sandbox.digio.com.au."
+  },
+  "hosted-zone:account=831282571722:domainName=willwinwang.com:region=ap-southeast-2": {
+    "Id": "/hostedzone/Z05394946WW9FJEH6J2W",
+    "Name": "willwinwang.com."
+  }
+}
