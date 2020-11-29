@@ -1,12 +1,13 @@
 import React from "react";
-import { Typography } from "@material-ui/core";
 import {
   createMuiTheme,
   ThemeProvider,
-  Container,
   useMediaQuery,
 } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Home, About, Portfolio, Contact } from "pages";
+import { BottomNav } from "components";
 
 const App = () => {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
@@ -15,21 +16,13 @@ const App = () => {
     () =>
       createMuiTheme({
         typography: {
-          fontFamily: [
-            "-apple-system",
-            "BlinkMacSystemFont",
-            '"Segoe UI"',
-            "Roboto",
-            '"Helvetica Neue"',
-            "Arial",
-            "sans-serif",
-            '"Apple Color Emoji"',
-            '"Segoe UI Emoji"',
-            '"Segoe UI Symbol"',
-          ].join(","),
+          fontFamily: ["poppins", "Helvetica", "sans-serif", "Arial"].join(","),
         },
         palette: {
           type: prefersDarkMode ? "dark" : "light",
+          primary: {
+            main: "#04b4e0",
+          },
         },
       }),
     [prefersDarkMode]
@@ -38,11 +31,26 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Container maxWidth="lg">
-        <Typography align="center" variant="h1" component="h1" gutterBottom>
-          Willwin Wang
-        </Typography>
-      </Container>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path={"/home"}>
+            <Home />
+          </Route>
+          <Route exact path={"/about"}>
+            <About />
+          </Route>
+          <Route exact path={"/portfolio"}>
+            <Portfolio />
+          </Route>
+          <Route exact path={"/contact"}>
+            <Contact />
+          </Route>
+        </Switch>
+        <BottomNav />
+      </BrowserRouter>
     </ThemeProvider>
   );
 };
