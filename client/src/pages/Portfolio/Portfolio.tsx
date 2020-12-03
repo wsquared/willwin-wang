@@ -1,11 +1,9 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 
-export const Portfolio = () => {
+export const Portfolio: React.FC = () => {
   const useStyles = makeStyles({
-    root: {
-      height: "200vh",
-    },
+    root: {},
   });
 
   const classes = useStyles();

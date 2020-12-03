@@ -1,1 +1,2 @@
-export { BottomNav } from "./BottomNav/BottomNav";
+export * from './BottomNav/BottomNav';
+export * from './FloatingNav/FloatingNav';

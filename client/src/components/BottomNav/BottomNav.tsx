@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react';
 import {
   BottomNavigation,
   BottomNavigationAction,
   useMediaQuery,
-} from "@material-ui/core";
-import { Home, Folder, Person, ContactMail } from "@material-ui/icons";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { useHistory } from "react-router-dom";
+} from '@material-ui/core';
+import { Home, Folder, Person, ContactMail } from '@material-ui/icons';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom';
 
-const BottomNav = () => {
+const BottomNav = (): React.ReactElement => {
   const useStyles = makeStyles({
     root: {
-      width: "100%",
-      position: "fixed",
+      width: '100%',
+      position: 'fixed',
       bottom: 0,
     },
   });
@@ -21,13 +21,18 @@ const BottomNav = () => {
 
   const theme = useTheme();
 
-  const matches = useMediaQuery(theme.breakpoints.down("md"));
+  const matches = useMediaQuery(theme.breakpoints.down('md'));
 
   const history = useHistory();
 
-  const [value, setValue] = React.useState(history.location.pathname.slice(1));
+  const [value, setValue] = React.useState(
+    history.location.pathname.slice(1) || 'home'
+  );
 
-  const handleChange = (_: React.ChangeEvent<{}>, newValue: string) => {
+  const handleChange = (
+    _: React.ChangeEvent<Record<string, unknown>>,
+    newValue: string
+  ) => {
     setValue(newValue);
     history.push(`/${newValue}`);
   };

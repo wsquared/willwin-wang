@@ -1,3 +1,3 @@
-import React from "react";
+import React from 'react';
 
-export const About = () => <>Hello world, this is all about me!</>;
+export const About: React.FC = () => <>Hello world, this is all about me!</>;

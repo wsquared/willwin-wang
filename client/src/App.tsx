@@ -1,27 +1,36 @@
-import React from "react";
+import React, { Suspense } from 'react';
 import {
   createMuiTheme,
   ThemeProvider,
   useMediaQuery,
-} from "@material-ui/core";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { Home, About, Portfolio, Contact } from "pages";
-import { BottomNav } from "components";
+  CssBaseline,
+  CircularProgress,
+  Container,
+} from '@material-ui/core';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Home, About, Portfolio, Contact, NotFound } from 'pages';
+import { BottomNav } from 'components';
+import {
+  ABOUT_ROUTE,
+  CONTACT_ROUTE,
+  HOME_ROUTE,
+  PORTFOLIO_ROUTE,
+} from '../src/routes';
+import { DefaultLayout } from 'Layouts';
 
-const App = () => {
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+const App: React.FC = () => {
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
   const theme = React.useMemo(
     () =>
       createMuiTheme({
         typography: {
-          fontFamily: ["poppins", "Helvetica", "sans-serif", "Arial"].join(","),
+          fontFamily: ['poppins', 'Helvetica', 'sans-serif', 'Arial'].join(','),
         },
         palette: {
-          type: prefersDarkMode ? "dark" : "light",
+          type: prefersDarkMode ? 'dark' : 'light',
           primary: {
-            main: "#04b4e0",
+            main: '#04b4e0',
           },
         },
       }),
@@ -31,26 +40,39 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path={"/home"}>
-            <Home />
-          </Route>
-          <Route exact path={"/about"}>
-            <About />
-          </Route>
-          <Route exact path={"/portfolio"}>
-            <Portfolio />
-          </Route>
-          <Route exact path={"/contact"}>
-            <Contact />
-          </Route>
-        </Switch>
-        <BottomNav />
-      </BrowserRouter>
+      <Suspense
+        fallback={
+          <Container>
+            <CircularProgress />
+          </Container>
+        }
+      >
+        <BrowserRouter>
+          <Switch>
+            <DefaultLayout>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route exact path={HOME_ROUTE}>
+                <Home />
+              </Route>
+              <Route exact path={ABOUT_ROUTE}>
+                <About />
+              </Route>
+              <Route exact path={PORTFOLIO_ROUTE}>
+                <Portfolio />
+              </Route>
+              <Route exact path={CONTACT_ROUTE}>
+                <Contact />
+              </Route>
+            </DefaultLayout>
+            <Route>
+              <NotFound />
+            </Route>
+          </Switch>
+          <BottomNav />
+        </BrowserRouter>
+      </Suspense>
     </ThemeProvider>
   );
 };
