@@ -8,15 +8,15 @@ import {
   Container,
 } from '@material-ui/core';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { Home, About, Portfolio, Contact, NotFound } from 'pages';
-import { BottomNav } from 'components';
+import { Home, About, Portfolio, Contact, Tictactoe, NotFound } from 'pages';
 import {
   ABOUT_ROUTE,
   CONTACT_ROUTE,
   HOME_ROUTE,
   PORTFOLIO_ROUTE,
-} from '../src/routes';
-import { DefaultLayout } from 'Layouts';
+  TICTACTOE_ROUTE,
+} from 'routes';
+import { DefaultLayout } from 'layouts';
 
 const App: React.FC = () => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -62,15 +62,19 @@ const App: React.FC = () => {
               <Route exact path={PORTFOLIO_ROUTE}>
                 <Portfolio />
               </Route>
+              <Route exact path={`${PORTFOLIO_ROUTE}${TICTACTOE_ROUTE}`}>
+                <Tictactoe />
+              </Route>
               <Route exact path={CONTACT_ROUTE}>
                 <Contact />
               </Route>
             </DefaultLayout>
-            <Route>
-              <NotFound />
-            </Route>
+            <DefaultLayout>
+              <Route>
+                <NotFound />
+              </Route>
+            </DefaultLayout>
           </Switch>
-          <BottomNav />
         </BrowserRouter>
       </Suspense>
     </ThemeProvider>

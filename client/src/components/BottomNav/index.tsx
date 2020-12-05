@@ -6,7 +6,7 @@ import {
 } from '@material-ui/core';
 import { Home, Folder, Person, ContactMail } from '@material-ui/icons';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 const BottomNav = (): React.ReactElement => {
   const useStyles = makeStyles({
@@ -23,10 +23,12 @@ const BottomNav = (): React.ReactElement => {
 
   const matches = useMediaQuery(theme.breakpoints.down('md'));
 
+  const location = useLocation();
+
   const history = useHistory();
 
   const [value, setValue] = React.useState(
-    history.location.pathname.slice(1) || 'home'
+    location.pathname.slice(1) || 'home'
   );
 
   const handleChange = (

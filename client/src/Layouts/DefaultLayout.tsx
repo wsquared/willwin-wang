@@ -2,14 +2,15 @@ import React from 'react';
 import { Container, useTheme, useMediaQuery } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { FloatingNav } from 'components';
+import { BottomNav } from 'components';
+import { useLocation } from 'react-router-dom';
+import { HOME_ROUTE } from 'routes';
 
 export const DefaultLayout: React.FC = ({ children }) => {
   const useStyles = makeStyles({
     root: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      height: '100vh',
+      marginTop: '50px',
+      marginBottom: '50px',
     },
   });
 
@@ -19,18 +20,30 @@ export const DefaultLayout: React.FC = ({ children }) => {
 
   const matches = useMediaQuery(theme.breakpoints.up('lg'));
 
+  const location = useLocation();
+
+  const matchesHome = new RegExp(`${HOME_ROUTE}|/`);
+
   if (matches) {
     return (
-      <Container maxWidth="lg" className={classes.root}>
+      <>
+        <Container
+          maxWidth="lg"
+          className={matchesHome.test(location.pathname) ? '' : classes.root}
+        >
+          <>{children}</>
+        </Container>
         <FloatingNav />
-        <>{children}</>
-      </Container>
+      </>
     );
   }
 
   return (
-    <Container maxWidth="lg" className={classes.root}>
-      <>{children}</>
-    </Container>
+    <>
+      <Container maxWidth="lg" className={classes.root}>
+        <>{children}</>
+      </Container>
+      <BottomNav />
+    </>
   );
 };

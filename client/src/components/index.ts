@@ -1,2 +1,3 @@
-export * from './BottomNav/BottomNav';
-export * from './FloatingNav/FloatingNav';
+export * from './BottomNav';
+export * from './FloatingNav';
+export * from './PortfolioCard';

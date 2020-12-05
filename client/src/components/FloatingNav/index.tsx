@@ -16,11 +16,15 @@ export const FloatingNav: React.FC = () => {
 
   const useStyles = makeStyles({
     arrowLeft: {
-      position: 'absolute',
+      top: '50%',
+      bottom: '50%',
+      position: 'fixed',
       left: '1vw',
     },
     arrowRight: {
-      position: 'absolute',
+      top: '50%',
+      bottom: '50%',
+      position: 'fixed',
       right: '1vw',
     },
   });
