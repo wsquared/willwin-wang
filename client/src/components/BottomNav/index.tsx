@@ -3,9 +3,10 @@ import {
   BottomNavigation,
   BottomNavigationAction,
   useMediaQuery,
+  makeStyles,
+  useTheme,
 } from '@material-ui/core';
 import { Home, Folder, Person, ContactMail } from '@material-ui/icons';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useHistory, useLocation } from 'react-router-dom';
 
 const BottomNav = (): React.ReactElement => {
@@ -48,6 +49,7 @@ const BottomNav = (): React.ReactElement => {
       value={value}
       className={classes.root}
       onChange={handleChange}
+      showLabels
     >
       <BottomNavigationAction label="Home" value="home" icon={<Home />} />
       <BottomNavigationAction label="About" value="about" icon={<Person />} />

@@ -4,7 +4,7 @@ import App from './App';
 import { renderWithRouter } from 'common';
 
 describe('App', () => {
-  test('renders home page with willwin wang text', () => {
+  it('renders home page with willwin wang text', () => {
     render(<App />);
 
     const element = screen.getByText(/willwin wang/i);
@@ -12,7 +12,7 @@ describe('App', () => {
     expect(element).toBeInTheDocument();
   });
 
-  test('renders home page with fullstack software developer text', () => {
+  it('renders home page with fullstack software developer text', () => {
     render(<App />);
 
     const element = screen.getByText(/fullstack software developer/i);
@@ -20,7 +20,7 @@ describe('App', () => {
     expect(element).toBeInTheDocument();
   });
 
-  test('renders about page', () => {
+  it('renders about page', () => {
     renderWithRouter(<App />, { route: '/about' });
 
     const element = screen.getByText(/about/i);
@@ -28,15 +28,17 @@ describe('App', () => {
     expect(element).toBeInTheDocument();
   });
 
-  test('renders portfolio page', () => {
-    renderWithRouter(<App />, { route: '/portfolio' });
+  describe('When I goto the portfolio route', () => {
+    it('renders tictactoe', () => {
+      const { getByText } = renderWithRouter(<App />, { route: '/portfolio' });
 
-    const element = screen.getByText(/portfolio/i);
+      const element = getByText(/tictactoe/i);
 
-    expect(element).toBeInTheDocument();
+      expect(element).toBeInTheDocument();
+    });
   });
 
-  test('renders contact page', () => {
+  it('renders contact page', () => {
     renderWithRouter(<App />, { route: '/contact' });
 
     const element = screen.getByText(/contact/i);
