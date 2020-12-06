@@ -28,7 +28,9 @@ export const renderWithRouter = (
   return render(ui, { wrapper: BrowserRouter });
 };
 
-export const createMatchMedia = (width: number) => (query: string) => ({
+export const createMatchMedia = (width: number) => (
+  query: string
+): MediaQueryList => ({
   matches: mediaQuery.match(query, { width }),
   addEventListener: () => undefined,
   removeEventListener: () => undefined,
