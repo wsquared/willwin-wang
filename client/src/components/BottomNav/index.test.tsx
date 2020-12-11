@@ -1,9 +1,8 @@
 import { fireEvent } from '@testing-library/react';
 import React from 'react';
 import { BottomNav } from './index';
-import { renderWithThemeProviderWithRouter } from 'common';
+import { renderWithThemeProviderWithRouter, createMatchMedia } from 'common';
 import { PORTFOLIO_ROUTE } from 'routes';
-import { createMatchMedia } from 'common';
 
 describe('Given BottomNav', () => {
   let matchMedia: ((query: string) => MediaQueryList) &

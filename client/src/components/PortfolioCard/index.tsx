@@ -7,24 +7,29 @@ import {
   Button,
   Typography,
 } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    [theme.breakpoints.down('md')]: {
-      minWidth: '100%',
-    },
-    [theme.breakpoints.up('lg')]: {
-      minWidth: '100%',
-    },
+const useStyles = makeStyles({
+  root: {},
+  cardActions: {
+    justifyContent: 'flex-end',
   },
-}));
+});
 
 interface PortfolioCardProps extends React.HTMLAttributes<HTMLDivElement> {
   title: string;
+  link: string;
 }
 
-export const PortfolioCard: React.FC<PortfolioCardProps> = ({ title }) => {
+export const PortfolioCard: React.FC<PortfolioCardProps> = ({
+  title,
+  link,
+}) => {
   const classes = useStyles();
+
+  const history = useHistory();
+
+  const handleClick = () => history.push(link);
 
   return (
     <Card className={classes.root}>
@@ -33,8 +38,10 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({ title }) => {
           {title}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">Play</Button>
+      <CardActions className={classes.cardActions}>
+        <Button size="small" onClick={handleClick}>
+          Play
+        </Button>
       </CardActions>
     </Card>
   );

@@ -4,6 +4,10 @@ import App from './App';
 import { renderWithRouter } from 'common';
 
 describe('App', () => {
+  beforeAll(() => {
+    window.scrollTo = jest.fn();
+  });
+
   it('renders home page with willwin wang text', () => {
     render(<App />);
 
