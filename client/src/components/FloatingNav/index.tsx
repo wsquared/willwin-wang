@@ -19,13 +19,13 @@ export const FloatingNav: React.FC = () => {
       top: '50%',
       bottom: '50%',
       position: 'fixed',
-      left: '1vw',
+      left: '1%',
     },
     arrowRight: {
       top: '50%',
       bottom: '50%',
       position: 'fixed',
-      right: '1vw',
+      right: '1%',
     },
   });
 

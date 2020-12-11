@@ -15,6 +15,7 @@ const BottomNav = (): React.ReactElement => {
       width: '100%',
       position: 'fixed',
       bottom: 0,
+      left: 0,
     },
   });
 
