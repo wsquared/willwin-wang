@@ -1,0 +1,26 @@
+version: 2.1
+orbs:
+  node: circleci/node@4.0.0
+jobs:
+  test:
+    docker:
+      - image: 'cimg/node:14.15.2'
+    steps:
+      - checkout
+      - node/install-npm
+      - node/install-packages:
+          app-dir: ~/project/client
+          cache-path: ~/project/node_modules
+          override-ci-command: npm i
+      - run:
+          working_directory: ~/project/client
+          name: Test
+          command: npm test -- --collectCoverage --watchAll=false
+      - store_artifacts:
+          path: ~/project/client/coverage
+          destination: coverage
+
+workflows:
+  build_and_test:
+    jobs:
+      - test
