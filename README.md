@@ -5,7 +5,9 @@
   </a>
 </p>
 
-> Code for static personal page and infrastructure to deploy
+[![wsquared](https://circleci.com/gh/wsquared/willwin-wang.svg?style=svg)](<https://app.circleci.com/pipelines/github/wsquared>)
+
+> Code for static personal page and infrastr xxxxucture to deploy
 
 ### 🏠 [Homepage](https://willwinwang.com)
 
