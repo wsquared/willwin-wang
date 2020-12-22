@@ -12,6 +12,10 @@ jobs:
           app-dir: ~/project/client
           cache-path: ~/project/client/node_modules
           override-ci-command: npm i
+      - node/install-packages:
+          app-dir: ~/project/infrastructure
+          cache-path: ~/project/infrastructure/node_modules
+          override-ci-command: npm i
       - run:
           working_directory: ~/project/client
           name: Test
@@ -25,6 +29,7 @@ jobs:
           # Must be relative path from root
           paths:
             - client
+            - infrastructure
   build_and_deploy:
     docker:
       - image: 'cimg/node:14.15.2'
@@ -36,10 +41,6 @@ jobs:
           working_directory: ~/project/client
           name: Build assets for production
           command: npm run build
-      - node/install-packages:
-          app-dir: ~/project/infrastructure
-          cache-path: ~/project/infrastructure/node_modules
-          override-ci-command: npm i
       - run:
           working_directory: ~/project/infrastructure
           name: Build stack for deployment
@@ -47,10 +48,10 @@ jobs:
       - run:
           working_directory: ~/project/infrastructure
           name: Deploy to production
-          command: npm run cdk deploy
+          command: ./scripts/cdk-deploy.sh $CDK_DEPLOY_ACCOUNT $CDK_DEPLOY_REGION $DOMAIN $SUBDOMAIN $SITE_CONTENTS_PATH
 
 workflows:
-  build_and_test:
+  test_and_deploy:
     jobs:
       - test
       - build_and_deploy:
