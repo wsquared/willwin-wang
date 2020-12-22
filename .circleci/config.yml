@@ -10,7 +10,7 @@ jobs:
       - node/install-npm
       - node/install-packages:
           app-dir: ~/project/client
-          cache-path: ~/project/node_modules
+          cache-path: ~/project/client/node_modules
           override-ci-command: npm i
       - run:
           working_directory: ~/project/client
@@ -36,6 +36,10 @@ jobs:
           working_directory: ~/project/client
           name: Build assets for production
           command: npm run build
+      - node/install-packages:
+          app-dir: ~/project/infrastructure
+          cache-path: ~/project/infrastructure/node_modules
+          override-ci-command: npm i
       - run:
           working_directory: ~/project/infrastructure
           name: Build stack for deployment
