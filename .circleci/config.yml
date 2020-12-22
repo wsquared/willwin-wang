@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  node: circleci/node@4.0.0
+  node: circleci/node@4.1.0
 jobs:
   test:
     docker:
@@ -19,8 +19,40 @@ jobs:
       - store_artifacts:
           path: ~/project/client/coverage
           destination: coverage
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory
+          root: .
+          # Must be relative path from root
+          paths:
+            - client
+  build_and_deploy:
+    docker:
+      - image: 'cimg/node:14.15.2'
+    steps:
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: .
+      - run:
+          working_directory: ~/project/client
+          name: Build assets for production
+          command: npm run build
+      - run:
+          working_directory: ~/project/infrastructure
+          name: Build stack for deployment
+          command: npm run build
+      - run:
+          working_directory: ~/project/infrastructure
+          name: Deploy to production
+          command: npm run cdk deploy
 
 workflows:
   build_and_test:
     jobs:
       - test
+      - build_and_deploy:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - test
