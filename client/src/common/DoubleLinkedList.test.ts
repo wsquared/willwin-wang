@@ -1,34 +1,21 @@
-import {
-  buildDoubleLinkedListNodes,
-  DoubleLinkedListNode,
-} from './DoubleLinkedList';
+import { DoubleLinkedListNode } from './DoubleLinkedList';
 
 describe('When I create a DoubleLinkedList', () => {
-  it('should return a map to the double linked list node', () => {
-    const cache = buildDoubleLinkedListNodes(['foo', 'foo']);
+  it('should have next node', () => {
+    const dll = new DoubleLinkedListNode('foo', 'foo');
+    const nextNode = new DoubleLinkedListNode('bar', 'qux');
 
-    const result = cache.get('foo');
+    dll.next = nextNode;
 
-    expect(result?.val).toBe('foo');
+    expect(dll.next).toEqual(nextNode);
   });
 
-  describe('When I add more than one node', () => {
-    let cache: Map<string, DoubleLinkedListNode<string, string>>;
+  it('should have previous node', () => {
+    const dll = new DoubleLinkedListNode('foo', 'foo');
+    const prevNode = new DoubleLinkedListNode('bar', 'qux');
 
-    beforeEach(() => {
-      cache = buildDoubleLinkedListNodes(['foo', 'foo'], ['bar', 'bar']);
-    });
+    dll.prev = prevNode;
 
-    it('should able to go next node', () => {
-      const fooNode = cache.get('foo');
-
-      expect(fooNode?.next?.val).toBe('bar');
-    });
-
-    it('should able to go to previous node', () => {
-      const fooNode = cache.get('foo');
-
-      expect(fooNode?.prev?.val).toBe('bar');
-    });
+    expect(dll.prev).toEqual(prevNode);
   });
 });

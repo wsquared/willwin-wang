@@ -4,3 +4,4 @@ export * from './Portfolio';
 export * from './Contact';
 export * from './NotFound';
 export * from './Tictactoe';
+export * from './Sudoku';

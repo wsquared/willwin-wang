@@ -8,12 +8,21 @@ import {
   Container,
 } from '@material-ui/core';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { Home, About, Portfolio, Contact, Tictactoe, NotFound } from 'pages';
+import {
+  Home,
+  About,
+  Portfolio,
+  Contact,
+  Tictactoe,
+  Sudoku,
+  NotFound,
+} from 'pages';
 import {
   ABOUT_ROUTE,
   CONTACT_ROUTE,
   HOME_ROUTE,
   PORTFOLIO_ROUTE,
+  SUDOKU_ROUTE,
   TICTACTOE_ROUTE,
 } from 'routes';
 import { DefaultLayout } from 'layouts';
@@ -64,6 +73,9 @@ const App: React.FC = () => {
               </Route>
               <Route exact path={`${PORTFOLIO_ROUTE}${TICTACTOE_ROUTE}`}>
                 <Tictactoe />
+              </Route>
+              <Route exact path={`${PORTFOLIO_ROUTE}${SUDOKU_ROUTE}`}>
+                <Sudoku />
               </Route>
               <Route exact path={CONTACT_ROUTE}>
                 <Contact />

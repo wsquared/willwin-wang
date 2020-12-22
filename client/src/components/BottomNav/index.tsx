@@ -30,7 +30,7 @@ const BottomNav = (): React.ReactElement => {
   const history = useHistory();
 
   const [value, setValue] = React.useState(
-    location.pathname.slice(1) || 'home'
+    location.pathname.trim().split('/')[1] || 'home'
   );
 
   const handleChange = (

@@ -37,26 +37,3 @@ export class DoubleLinkedListNode<K, V> {
     this._next = value;
   }
 }
-
-export const buildDoubleLinkedListNodes = <K, T>(
-  firstNode: [K, T],
-  ...rest: [K, T][]
-): Map<K, DoubleLinkedListNode<K, T>> => {
-  let head = new DoubleLinkedListNode<K, T>(firstNode[0], firstNode[1]);
-  const cache = new Map<K, DoubleLinkedListNode<K, T>>();
-  cache.set(firstNode[0], head);
-  const temp = head;
-
-  for (const [key, value] of rest) {
-    const node = new DoubleLinkedListNode(key, value);
-    cache.set(key, node);
-    head.next = node;
-    node.prev = head;
-    head = head.next;
-  }
-
-  head.next = temp;
-  temp.prev = head;
-
-  return cache;
-};

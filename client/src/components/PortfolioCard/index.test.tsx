@@ -1,14 +1,14 @@
 import { fireEvent } from '@testing-library/react';
 import React from 'react';
 import { PortfolioCard } from './index';
-import { renderWithThemeProviderWithRouter } from 'common';
+import { renderWithRouter } from 'common';
 import { TICTACTOE_ROUTE } from 'routes';
 
 describe('Given PortfolioCard', () => {
   it('should display title text', () => {
     const title = 'Tictactoe';
 
-    const { getByText } = renderWithThemeProviderWithRouter(
+    const { getByText } = renderWithRouter(
       <PortfolioCard title={title} link={TICTACTOE_ROUTE} />
     );
 
@@ -17,7 +17,7 @@ describe('Given PortfolioCard', () => {
 
   describe('When I click on play tictactoe', () => {
     it('should route to tictactoe', () => {
-      const { getByText } = renderWithThemeProviderWithRouter(
+      const { getByText } = renderWithRouter(
         <PortfolioCard title={'Tictactoe'} link={TICTACTOE_ROUTE} />
       );
 

@@ -1,7 +1,7 @@
 import { fireEvent } from '@testing-library/react';
 import React from 'react';
 import { BottomNav } from './index';
-import { renderWithThemeProviderWithRouter, createMatchMedia } from 'common';
+import { renderWithRouter, createMatchMedia } from 'common';
 import { PORTFOLIO_ROUTE } from 'routes';
 
 describe('Given BottomNav', () => {
@@ -19,7 +19,7 @@ describe('Given BottomNav', () => {
 
   describe('When I click on home', () => {
     it('should route to home', () => {
-      const { getByText } = renderWithThemeProviderWithRouter(<BottomNav />);
+      const { getByText } = renderWithRouter(<BottomNav />);
 
       fireEvent.click(getByText(/home/i));
 
@@ -29,10 +29,7 @@ describe('Given BottomNav', () => {
 
   describe('When I click on about', () => {
     it('should route to about', () => {
-      const { getByText } = renderWithThemeProviderWithRouter(
-        <BottomNav />,
-        {}
-      );
+      const { getByText } = renderWithRouter(<BottomNav />);
 
       fireEvent.click(getByText(/about/i));
 
@@ -42,7 +39,7 @@ describe('Given BottomNav', () => {
 
   describe('When I click on portfolio', () => {
     it('should route to portfolio', () => {
-      const { getByText } = renderWithThemeProviderWithRouter(<BottomNav />, {
+      const { getByText } = renderWithRouter(<BottomNav />, {
         route: PORTFOLIO_ROUTE,
       });
 
@@ -54,7 +51,7 @@ describe('Given BottomNav', () => {
 
   describe('When I click on contact', () => {
     it('should route to contact', () => {
-      const { getByText } = renderWithThemeProviderWithRouter(<BottomNav />, {
+      const { getByText } = renderWithRouter(<BottomNav />, {
         route: PORTFOLIO_ROUTE,
       });
 
