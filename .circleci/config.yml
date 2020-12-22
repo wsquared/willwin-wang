@@ -1,7 +1,43 @@
 version: 2.1
 orbs:
-  node: circleci/node@3.0.0
+  node: circleci/node@4.0.0
+jobs:
+  install-npm:
+    docker:
+      - image: 'cimg/node:14.15.2'
+    steps:
+      - checkout
+      - node/install-npm
+      - node/install-packages:
+          app-dir: ~/client
+          cache-path: node_modules
+          override-ci-command: npm i
+      # Save workspace for subsequent jobs (i.e. test)
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+  test:
+    docker:
+      - image: 'cimg/node:14.15.2'
+    steps:
+      # Reuse the workspace from the build job
+      - attach_workspace:
+          at: .
+      - run:
+          name: Test
+          command: npm test
+      - store_artifacts:
+          path: test-results.xml
+          destination: deliverable.xml
+      - store_artifacts:
+          path: coverage
+          destination: coverage
+
 workflows:
-  node-tests:
+  build_and_test:
     jobs:
-      - node/test
+      - install-npm
+      - test:
+          requires:
+            - install-npm
