@@ -40,6 +40,14 @@ describe('App', () => {
 
       expect(element).toBeInTheDocument();
     });
+
+    it('renders sudoku', () => {
+      const { getByText } = renderWithRouter(<App />, { route: '/portfolio' });
+
+      const element = getByText(/sudoku/i);
+
+      expect(element).toBeInTheDocument();
+    });
   });
 
   it('renders contact page', () => {

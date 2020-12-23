@@ -25,7 +25,7 @@ import {
   SUDOKU_ROUTE,
   TICTACTOE_ROUTE,
 } from 'routes';
-import { DefaultLayout } from 'layouts';
+import { DefaultLayout, PortfolioLayout } from 'layouts';
 
 const App: React.FC = () => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -58,34 +58,46 @@ const App: React.FC = () => {
       >
         <BrowserRouter>
           <Switch>
-            <DefaultLayout>
-              <Route exact path="/">
+            <Route exact path="/">
+              <DefaultLayout>
                 <Home />
-              </Route>
-              <Route exact path={HOME_ROUTE}>
+              </DefaultLayout>
+            </Route>
+            <Route exact path={HOME_ROUTE}>
+              <DefaultLayout>
                 <Home />
-              </Route>
-              <Route exact path={ABOUT_ROUTE}>
+              </DefaultLayout>
+            </Route>
+            <Route exact path={ABOUT_ROUTE}>
+              <DefaultLayout>
                 <About />
-              </Route>
-              <Route exact path={PORTFOLIO_ROUTE}>
+              </DefaultLayout>
+            </Route>
+            <Route exact path={PORTFOLIO_ROUTE}>
+              <DefaultLayout>
                 <Portfolio />
-              </Route>
-              <Route exact path={`${PORTFOLIO_ROUTE}${TICTACTOE_ROUTE}`}>
+              </DefaultLayout>
+            </Route>
+            <Route exact path={`${PORTFOLIO_ROUTE}${TICTACTOE_ROUTE}`}>
+              <PortfolioLayout>
                 <Tictactoe />
-              </Route>
-              <Route exact path={`${PORTFOLIO_ROUTE}${SUDOKU_ROUTE}`}>
+              </PortfolioLayout>
+            </Route>
+            <Route exact path={`${PORTFOLIO_ROUTE}${SUDOKU_ROUTE}`}>
+              <PortfolioLayout>
                 <Sudoku />
-              </Route>
-              <Route exact path={CONTACT_ROUTE}>
+              </PortfolioLayout>
+            </Route>
+            <Route exact path={CONTACT_ROUTE}>
+              <DefaultLayout>
                 <Contact />
-              </Route>
-            </DefaultLayout>
-            <DefaultLayout>
-              <Route>
+              </DefaultLayout>
+            </Route>
+            <Route>
+              <DefaultLayout>
                 <NotFound />
-              </Route>
-            </DefaultLayout>
+              </DefaultLayout>
+            </Route>
           </Switch>
         </BrowserRouter>
       </Suspense>
