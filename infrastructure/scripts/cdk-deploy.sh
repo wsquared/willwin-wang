@@ -7,7 +7,7 @@ if [[ $# -ge 5 ]]; then
     export SUBDOMAIN=$4
     export SITE_CONTENTS_PATH=$5
     shift; shift; shift; shift; shift
-    npx cdk deploy "$@"
+    npx cdk deploy "$@" --require-approval=never
     exit $?
 else
     echo 1>&2 "Provide AWS account and region as first two args."
