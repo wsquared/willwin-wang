@@ -86,20 +86,26 @@ export const Tictactoe: React.FC<{ size?: number }> = ({ size = 3 }) => {
     return <CloseOutlined data-testid="cross" />;
   };
 
+  const PlayerMoveText: React.FC<{ player: Player }> = ({ player }) => {
+    return player === Player.One ? (
+      <Typography className={classes.header} variant="h5" component="h2">
+        Player One&apos;s move
+      </Typography>
+    ) : (
+      <Typography className={classes.header} variant="h5" component="h2">
+        Player Two&apos;s move
+      </Typography>
+    );
+  };
+
   return (
     <div>
       {showWinner ? (
         <Typography className={classes.header} variant="h5" component="h2">
           Congrat&apos;s Player {player === 1 ? 'One' : 'Two'}, you just won!
         </Typography>
-      ) : player === Player.One ? (
-        <Typography variant="h5" component="h2">
-          Player One&apos;s move
-        </Typography>
       ) : (
-        <Typography variant="h5" component="h2">
-          Player Two&apos;s move
-        </Typography>
+        <PlayerMoveText player={player} />
       )}
       <div className={classes.gameContainer}>
         <div className={classes.gameBoard}>
