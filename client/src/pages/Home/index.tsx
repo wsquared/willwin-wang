@@ -7,11 +7,11 @@ const Home: React.FC = () => {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      [theme.breakpoints.up('lg')]: {
+      [theme.breakpoints.up('md')]: {
         height: '100vh',
       },
-      [theme.breakpoints.down('md')]: {
-        height: '85vh',
+      [theme.breakpoints.down('sm')]: {
+        height: '75vh',
       },
     },
     typographyContainer: {

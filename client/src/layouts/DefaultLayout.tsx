@@ -13,7 +13,7 @@ export const DefaultLayout: React.FC = ({ children }) => {
     },
     mobile: {
       marginTop: '50px',
-      marginBottom: '100px',
+      marginBottom: '50px',
     },
   });
 
