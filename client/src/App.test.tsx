@@ -1,7 +1,7 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import App from './App';
-import { renderWithRouter } from 'common';
+import { renderTestComponent } from 'common';
 
 describe('App', () => {
   beforeAll(() => {
@@ -9,7 +9,7 @@ describe('App', () => {
   });
 
   it('renders home page with willwin wang text', () => {
-    render(<App />);
+    renderTestComponent(<App />);
 
     const element = screen.getByText(/willwin wang/i);
 
@@ -17,7 +17,7 @@ describe('App', () => {
   });
 
   it('renders home page with fullstack software developer text', () => {
-    render(<App />);
+    renderTestComponent(<App />);
 
     const element = screen.getByText(/fullstack software developer/i);
 
@@ -25,7 +25,7 @@ describe('App', () => {
   });
 
   it('renders about page', () => {
-    renderWithRouter(<App />, { route: '/about' });
+    renderTestComponent(<App />, { route: '/about' });
 
     const element = screen.getByText(/about/i);
 
@@ -34,7 +34,9 @@ describe('App', () => {
 
   describe('When I goto the portfolio route', () => {
     it('renders tictactoe', () => {
-      const { getByText } = renderWithRouter(<App />, { route: '/portfolio' });
+      const { getByText } = renderTestComponent(<App />, {
+        route: '/portfolio',
+      });
 
       const element = getByText(/tictactoe/i);
 
@@ -42,7 +44,9 @@ describe('App', () => {
     });
 
     it('renders sudoku', () => {
-      const { getByText } = renderWithRouter(<App />, { route: '/portfolio' });
+      const { getByText } = renderTestComponent(<App />, {
+        route: '/portfolio',
+      });
 
       const element = getByText(/sudoku/i);
 
@@ -51,7 +55,7 @@ describe('App', () => {
   });
 
   it('renders contact page', () => {
-    renderWithRouter(<App />, { route: '/contact' });
+    renderTestComponent(<App />, { route: '/contact' });
 
     const element = screen.getByText(/contact/i);
 

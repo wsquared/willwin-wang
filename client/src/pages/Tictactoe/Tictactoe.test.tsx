@@ -1,10 +1,11 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { screen, fireEvent } from '@testing-library/react';
+import { renderTestComponent } from 'common';
 import { Tictactoe } from './Tictactoe';
 
 describe('Tictactoe', () => {
   it('should render nine boxes by default', () => {
-    render(<Tictactoe />);
+    renderTestComponent(<Tictactoe />);
 
     const buttons = screen.getAllByRole('button');
 
@@ -12,7 +13,7 @@ describe('Tictactoe', () => {
   });
 
   it('should render buttons without circle or cross by default', () => {
-    render(<Tictactoe />);
+    renderTestComponent(<Tictactoe />);
 
     expect(screen.queryByTestId('circle')).not.toBeInTheDocument();
     expect(screen.queryByTestId('cross')).not.toBeInTheDocument();
@@ -20,7 +21,7 @@ describe('Tictactoe', () => {
 
   describe('When I click on the first box', () => {
     it('should render circle in that box', () => {
-      render(<Tictactoe />);
+      renderTestComponent(<Tictactoe />);
 
       fireEvent.click(screen.getAllByRole('button')[0]);
 
@@ -31,7 +32,7 @@ describe('Tictactoe', () => {
 
     describe('When I click in that same box again', () => {
       it('should render circle in that box', () => {
-        render(<Tictactoe />);
+        renderTestComponent(<Tictactoe />);
 
         fireEvent.click(screen.getAllByRole('button')[0]);
         fireEvent.click(screen.getAllByRole('button')[0]);
@@ -46,7 +47,7 @@ describe('Tictactoe', () => {
   });
 
   it('should render cross in that box', () => {
-    render(<Tictactoe />);
+    renderTestComponent(<Tictactoe />);
 
     fireEvent.click(screen.getAllByRole('button')[1]);
     fireEvent.click(screen.getAllByRole('button')[0]);
@@ -58,7 +59,7 @@ describe('Tictactoe', () => {
 
   describe('When I click on the same box as a second player', () => {
     it('should render cross in that box', () => {
-      render(<Tictactoe />);
+      renderTestComponent(<Tictactoe />);
 
       fireEvent.click(screen.getAllByRole('button')[1]);
       fireEvent.click(screen.getAllByRole('button')[0]);
@@ -72,7 +73,7 @@ describe('Tictactoe', () => {
 
   describe('When I click on the last box', () => {
     it('should render circle in that box', () => {
-      render(<Tictactoe />);
+      renderTestComponent(<Tictactoe />);
 
       const buttons = screen.getAllByRole('button');
 
@@ -86,7 +87,7 @@ describe('Tictactoe', () => {
     });
 
     it('should render cross in that box', () => {
-      render(<Tictactoe />);
+      renderTestComponent(<Tictactoe />);
 
       const buttons = screen.getAllByRole('button');
 
@@ -103,7 +104,7 @@ describe('Tictactoe', () => {
 
   describe('When I match diagonal requirement', () => {
     it('should show me as a winner', () => {
-      render(<Tictactoe />);
+      renderTestComponent(<Tictactoe />);
 
       fireEvent.click(screen.getAllByRole('button')[0]);
       fireEvent.click(screen.getAllByRole('button')[1]);
@@ -117,7 +118,7 @@ describe('Tictactoe', () => {
 
   describe('When I match reverse diagonal requirement', () => {
     it('should show me as a winner', () => {
-      render(<Tictactoe />);
+      renderTestComponent(<Tictactoe />);
 
       fireEvent.click(screen.getAllByRole('button')[0]);
       fireEvent.click(screen.getAllByRole('button')[2]);
@@ -132,7 +133,7 @@ describe('Tictactoe', () => {
 
   describe('When I match row requirement', () => {
     it('should show me as a winner', () => {
-      render(<Tictactoe />);
+      renderTestComponent(<Tictactoe />);
 
       fireEvent.click(screen.getAllByRole('button')[0]);
       fireEvent.click(screen.getAllByRole('button')[3]);
@@ -146,7 +147,7 @@ describe('Tictactoe', () => {
 
   describe('When I match column requirement', () => {
     it('should show me as a winner', () => {
-      render(<Tictactoe />);
+      renderTestComponent(<Tictactoe />);
 
       fireEvent.click(screen.getAllByRole('button')[0]);
       fireEvent.click(screen.getAllByRole('button')[1]);

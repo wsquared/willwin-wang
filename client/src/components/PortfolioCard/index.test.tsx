@@ -1,14 +1,14 @@
 import { fireEvent } from '@testing-library/react';
 import React from 'react';
 import { PortfolioCard } from './index';
-import { renderWithRouter } from 'common';
+import { renderTestComponent } from 'common';
 import { TICTACTOE_ROUTE } from 'routes';
 
 describe('Given PortfolioCard', () => {
   it('should display title text', () => {
     const title = 'Tictactoe';
 
-    const { getByText } = renderWithRouter(
+    const { getByText } = renderTestComponent(
       <PortfolioCard title={title} tsCodeLink={'#'} link={TICTACTOE_ROUTE} />
     );
 
@@ -17,7 +17,7 @@ describe('Given PortfolioCard', () => {
 
   describe('When I click on play tictactoe', () => {
     it('should route to tictactoe', () => {
-      const { getByText } = renderWithRouter(
+      const { getByText } = renderTestComponent(
         <PortfolioCard
           tsCodeLink={'#'}
           title={'Tictactoe'}

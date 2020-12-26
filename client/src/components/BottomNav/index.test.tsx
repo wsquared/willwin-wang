@@ -1,7 +1,7 @@
-import { fireEvent } from '@testing-library/react';
 import React from 'react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { BottomNav } from './index';
-import { renderWithRouter, createMatchMedia } from 'common';
+import { renderTestComponent, createMatchMedia } from 'common';
 import { PORTFOLIO_ROUTE } from 'routes';
 
 describe('Given BottomNav', () => {
@@ -19,7 +19,7 @@ describe('Given BottomNav', () => {
 
   describe('When I click on home', () => {
     it('should route to home', () => {
-      const { getByText } = renderWithRouter(<BottomNav />);
+      const { getByText } = renderTestComponent(<BottomNav />);
 
       fireEvent.click(getByText(/home/i));
 
@@ -29,7 +29,7 @@ describe('Given BottomNav', () => {
 
   describe('When I click on about', () => {
     it('should route to about', () => {
-      const { getByText } = renderWithRouter(<BottomNav />);
+      const { getByText } = renderTestComponent(<BottomNav />);
 
       fireEvent.click(getByText(/about/i));
 
@@ -39,11 +39,11 @@ describe('Given BottomNav', () => {
 
   describe('When I click on portfolio', () => {
     it('should route to portfolio', () => {
-      const { getByText } = renderWithRouter(<BottomNav />, {
+      const { getByText } = renderTestComponent(<BottomNav />, {
         route: PORTFOLIO_ROUTE,
       });
 
-      fireEvent.click(getByText(/portfolio/i));
+      waitFor(() => fireEvent.click(getByText(/portfolio/i)));
 
       expect(window.location.pathname).toBe('/portfolio');
     });
@@ -51,11 +51,11 @@ describe('Given BottomNav', () => {
 
   describe('When I click on contact', () => {
     it('should route to contact', () => {
-      const { getByText } = renderWithRouter(<BottomNav />, {
+      const { getByText } = renderTestComponent(<BottomNav />, {
         route: PORTFOLIO_ROUTE,
       });
 
-      fireEvent.click(getByText(/contact/i));
+      waitFor(() => fireEvent.click(getByText(/contact/i)));
 
       expect(window.location.pathname).toBe('/contact');
     });
