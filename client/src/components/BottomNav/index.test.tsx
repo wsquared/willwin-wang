@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { fireEvent, waitFor } from '@testing-library/react';
 import { BottomNav } from './index';
 import { renderTestComponent, createMatchMedia } from 'common';
 import { PORTFOLIO_ROUTE } from 'routes';
