@@ -2,14 +2,13 @@ import React from 'react';
 import {
   BottomNavigation,
   BottomNavigationAction,
-  useMediaQuery,
   makeStyles,
-  useTheme,
 } from '@material-ui/core';
 import { Home, Folder, Person, ContactMail } from '@material-ui/icons';
 import { useHistory, useLocation } from 'react-router-dom';
+import { useTranslate } from 'hooks';
 
-const BottomNav = (): React.ReactElement => {
+const BottomNav: React.FC = () => {
   const useStyles = makeStyles({
     root: {
       width: '100%',
@@ -21,9 +20,7 @@ const BottomNav = (): React.ReactElement => {
 
   const classes = useStyles();
 
-  const theme = useTheme();
-
-  const matches = useMediaQuery(theme.breakpoints.down('md'));
+  const translate = useTranslate();
 
   const location = useLocation();
 
@@ -41,26 +38,29 @@ const BottomNav = (): React.ReactElement => {
     history.push(`/${newValue}`);
   };
 
-  if (!matches) {
-    return <></>;
-  }
-
   return (
     <BottomNavigation
       value={value}
       className={classes.root}
       onChange={handleChange}
-      showLabels
     >
-      <BottomNavigationAction label="Home" value="home" icon={<Home />} />
-      <BottomNavigationAction label="About" value="about" icon={<Person />} />
       <BottomNavigationAction
-        label="Portfolio"
+        label={translate('home')}
+        value="home"
+        icon={<Home />}
+      />
+      <BottomNavigationAction
+        label={translate('about')}
+        value="about"
+        icon={<Person />}
+      />
+      <BottomNavigationAction
+        label={translate('portfolio')}
         value="portfolio"
         icon={<Folder />}
       />
       <BottomNavigationAction
-        label="Contact"
+        label={translate('contact')}
         value="contact"
         icon={<ContactMail />}
       />

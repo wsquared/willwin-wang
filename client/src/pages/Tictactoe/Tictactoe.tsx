@@ -7,7 +7,13 @@ import {
 import { useStyles } from './Tictactoe.styles';
 import { v4 as uuid } from 'uuid';
 import { range } from 'common';
+import { useTranslate } from 'hooks';
 
+// TODO: Implement start again
+// TODO: Implement when tie
+// TODO: Add analytics
+// TODO: Add internationalisation
+// TODO: Implement score
 export const Tictactoe: React.FC<{ size?: number }> = ({ size = 3 }) => {
   enum Player {
     One = 1,
@@ -15,6 +21,8 @@ export const Tictactoe: React.FC<{ size?: number }> = ({ size = 3 }) => {
   }
 
   const classes = useStyles();
+
+  const translate = useTranslate();
 
   const [player, setPlayer] = useState<Player>(Player.One);
 
@@ -87,13 +95,14 @@ export const Tictactoe: React.FC<{ size?: number }> = ({ size = 3 }) => {
   };
 
   const PlayerMoveText: React.FC<{ player: Player }> = ({ player }) => {
-    return player === Player.One ? (
+    return (
       <Typography className={classes.header} variant="h5" component="h2">
-        Player One&apos;s move
-      </Typography>
-    ) : (
-      <Typography className={classes.header} variant="h5" component="h2">
-        Player Two&apos;s move
+        {translate('playerCurrentMove', {
+          player:
+            player === Player.One
+              ? translate('playerOne')
+              : translate('playerTwo'),
+        })}
       </Typography>
     );
   };
@@ -102,7 +111,12 @@ export const Tictactoe: React.FC<{ size?: number }> = ({ size = 3 }) => {
     <div>
       {showWinner ? (
         <Typography className={classes.header} variant="h5" component="h2">
-          Congrat&apos;s Player {player === 1 ? 'One' : 'Two'}, you just won!
+          {translate('congratsWinner', {
+            player:
+              player === Player.One
+                ? translate('playerOne')
+                : translate('playerTwo'),
+          })}
         </Typography>
       ) : (
         <PlayerMoveText player={player} />

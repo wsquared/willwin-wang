@@ -1,6 +1,11 @@
 import React from 'react';
-import { Container } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import {
+  Container,
+  makeStyles,
+  useMediaQuery,
+  useTheme,
+} from '@material-ui/core';
+import { PortfolioBottomNav, PortfolioNav } from 'components';
 
 export const PortfolioLayout: React.FC = ({ children }) => {
   const useStyles = makeStyles({
@@ -12,9 +17,25 @@ export const PortfolioLayout: React.FC = ({ children }) => {
 
   const classes = useStyles();
 
+  const theme = useTheme();
+
+  const matches = useMediaQuery(theme.breakpoints.up('md'));
+
+  if (matches) {
+    return (
+      <>
+        <Container maxWidth="lg" className={classes.root}>
+          <PortfolioNav />
+          <>{children}</>
+        </Container>
+      </>
+    );
+  }
+
   return (
     <>
       <Container maxWidth="lg" className={classes.root}>
+        <PortfolioBottomNav />
         <>{children}</>
       </Container>
     </>

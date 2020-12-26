@@ -9,7 +9,7 @@ describe('Given PortfolioCard', () => {
     const title = 'Tictactoe';
 
     const { getByText } = renderWithRouter(
-      <PortfolioCard title={title} link={TICTACTOE_ROUTE} />
+      <PortfolioCard title={title} tsCodeLink={'#'} link={TICTACTOE_ROUTE} />
     );
 
     expect(getByText(title)).toBeInTheDocument();
@@ -18,7 +18,11 @@ describe('Given PortfolioCard', () => {
   describe('When I click on play tictactoe', () => {
     it('should route to tictactoe', () => {
       const { getByText } = renderWithRouter(
-        <PortfolioCard title={'Tictactoe'} link={TICTACTOE_ROUTE} />
+        <PortfolioCard
+          tsCodeLink={'#'}
+          title={'Tictactoe'}
+          link={TICTACTOE_ROUTE}
+        />
       );
 
       fireEvent.click(getByText(/play/i));

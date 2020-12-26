@@ -1,0 +1,16 @@
+export const en = {
+  home: 'Home',
+  about: 'About',
+  portfolio: 'Porfolio',
+  contact: 'Contact',
+  play: 'Play',
+  exit: 'Exit',
+  new: 'New',
+  tictactoeTitle: 'Tictactoe',
+  sudokuTitle: 'Sudoku',
+  viewCode: '<View code>',
+  congratsWinner: "Congrat's Player {player}, you just won!",
+  playerOne: 'One',
+  playerTwo: 'Two',
+  playerCurrentMove: "Player {player}'s move",
+};

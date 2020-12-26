@@ -13,7 +13,7 @@ export const DefaultLayout: React.FC = ({ children }) => {
     },
     mobile: {
       marginTop: '50px',
-      marginBottom: '50px',
+      marginBottom: '100px',
     },
   });
 
@@ -21,13 +21,13 @@ export const DefaultLayout: React.FC = ({ children }) => {
 
   const theme = useTheme();
 
-  const matches = useMediaQuery(theme.breakpoints.up('md'));
-
   const location = useLocation();
 
   const matchesHome = new RegExp(`${HOME_ROUTE}|/$`);
 
-  if (matches) {
+  const matchesDownMd = useMediaQuery(theme.breakpoints.down('md'));
+
+  if (useMediaQuery(theme.breakpoints.up('md'))) {
     return (
       <>
         <Container
@@ -45,7 +45,7 @@ export const DefaultLayout: React.FC = ({ children }) => {
     <>
       <Container maxWidth="lg" className={classes.mobile}>
         <>{children}</>
-        <BottomNav />
+        {matchesDownMd ? <BottomNav /> : null}
       </Container>
     </>
   );
