@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Container, Typography, makeStyles } from '@material-ui/core';
+import { useTranslate } from 'hooks';
 
 const Home: React.FC = () => {
   const useStyles = makeStyles((theme) => ({
@@ -21,6 +22,8 @@ const Home: React.FC = () => {
 
   const classes = useStyles();
 
+  const translate = useTranslate();
+
   useEffect(() => {
     window.scrollTo({ top: 0 });
   });
@@ -30,10 +33,10 @@ const Home: React.FC = () => {
       <Container>
         <div className={classes.typographyContainer}>
           <Typography align="center" variant="h2" component="h2" gutterBottom>
-            Willwin Wang
+            {translate('name')}
           </Typography>
-          <Typography align="center" variant="h6">
-            Fullstack software developer
+          <Typography align="center" variant="h6" component="h3">
+            {translate('roleTitle')}
           </Typography>
         </div>
       </Container>

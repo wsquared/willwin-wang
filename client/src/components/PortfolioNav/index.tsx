@@ -74,7 +74,12 @@ export const PortfolioNav: React.FC = () => {
 
   return (
     <>
-      <Button aria-controls="menu" aria-haspopup="true" onClick={handleClick}>
+      <Button
+        aria-controls="menu"
+        aria-haspopup="true"
+        aria-label={translate('menu')}
+        onClick={handleClick}
+      >
         <SvgIcon>
           <MenuOutlined />
         </SvgIcon>

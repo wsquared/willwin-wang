@@ -1,4 +1,5 @@
 export const en = {
+  menu: 'Menu',
   home: 'Home',
   about: 'About',
   portfolio: 'Porfolio',
@@ -14,4 +15,8 @@ export const en = {
   playerTwo: 'Two',
   playerCurrentMove: "Player {player}'s move",
   draw: "Look's like it's a draw!",
+  roleTitle: 'Fullstack software developer',
+  name: 'Willwin Wang',
+  forwardArrow: 'Forward arrow',
+  backArrow: 'Back arrow',
 };

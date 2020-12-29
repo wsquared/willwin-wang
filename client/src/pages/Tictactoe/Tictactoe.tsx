@@ -149,6 +149,8 @@ export const Tictactoe: React.FC = () => {
               key={uuid()}
               className={classes.box}
               onClick={handleClick(box - 1)}
+              role={'button'}
+              aria-label={`box ${box}`}
             >
               <SvgIcon fontSize={'large'}>
                 <PlayerMove box={box - 1} />

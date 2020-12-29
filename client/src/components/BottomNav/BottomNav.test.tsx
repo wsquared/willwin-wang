@@ -1,6 +1,6 @@
 import React from 'react';
 import { fireEvent, waitFor } from '@testing-library/react';
-import { BottomNav } from './index';
+import { BottomNav } from './BottomNav';
 import { renderTestComponent, createMatchMedia } from 'common';
 import { PORTFOLIO_ROUTE } from 'routes';
 
