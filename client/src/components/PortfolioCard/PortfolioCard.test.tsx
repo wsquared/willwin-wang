@@ -1,6 +1,6 @@
 import { fireEvent, screen } from '@testing-library/react';
 import React from 'react';
-import { PortfolioCard } from './index';
+import { PortfolioCard } from './PortfolioCard';
 import { renderTestComponent } from 'common';
 import { TICTACTOE_ROUTE } from 'routes';
 
