@@ -23,10 +23,10 @@ describe('Tictactoe', () => {
     it('should render circle in that box', () => {
       renderTestComponent(<Tictactoe />);
 
-      fireEvent.click(screen.getAllByRole('button')[0]);
+      fireEvent.click(screen.getAllByRole('button')[3]);
 
       expect(
-        screen.getAllByRole('button')[0].querySelector('[data-testid="circle"]')
+        screen.getAllByRole('button')[3].querySelector('[data-testid="circle"]')
       ).toBeInTheDocument();
     });
 
@@ -34,12 +34,12 @@ describe('Tictactoe', () => {
       it('should render circle in that box', () => {
         renderTestComponent(<Tictactoe />);
 
-        fireEvent.click(screen.getAllByRole('button')[0]);
-        fireEvent.click(screen.getAllByRole('button')[0]);
+        fireEvent.click(screen.getAllByRole('button')[4]);
+        fireEvent.click(screen.getAllByRole('button')[4]);
 
         expect(
           screen
-            .getAllByRole('button')[0]
+            .getAllByRole('button')[4]
             .querySelector('[data-testid="circle"]')
         ).toBeInTheDocument();
       });
@@ -50,6 +50,7 @@ describe('Tictactoe', () => {
     renderTestComponent(<Tictactoe />);
 
     fireEvent.click(screen.getAllByRole('button')[1]);
+
     fireEvent.click(screen.getAllByRole('button')[0]);
 
     expect(
@@ -61,12 +62,12 @@ describe('Tictactoe', () => {
     it('should render cross in that box', () => {
       renderTestComponent(<Tictactoe />);
 
-      fireEvent.click(screen.getAllByRole('button')[1]);
-      fireEvent.click(screen.getAllByRole('button')[0]);
-      fireEvent.click(screen.getAllByRole('button')[0]);
+      fireEvent.click(screen.getAllByRole('button')[2]);
+      fireEvent.click(screen.getAllByRole('button')[5]);
+      fireEvent.click(screen.getAllByRole('button')[5]);
 
       expect(
-        screen.getAllByRole('button')[0].querySelector('[data-testid="cross"]')
+        screen.getAllByRole('button')[5].querySelector('[data-testid="cross"]')
       ).toBeInTheDocument();
     });
   });

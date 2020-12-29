@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, SvgIcon, Typography } from '@material-ui/core';
 import {
   RadioButtonUncheckedOutlined,
@@ -8,29 +8,22 @@ import { useStyles } from './Tictactoe.styles';
 import { v4 as uuid } from 'uuid';
 import { range } from 'common';
 import { useTranslate } from 'hooks';
+import { useGameState, useGameDispatch, TictactoePlayer } from 'stores';
 
-// TODO: Implement start again
-// TODO: Implement when tie
+// TODO: Write tests
 // TODO: Add analytics
-// TODO: Add internationalisation
 // TODO: Implement score
-export const Tictactoe: React.FC<{ size?: number }> = ({ size = 3 }) => {
-  enum Player {
-    One = 1,
-    Two = -1,
-  }
-
+// TODO: Implement AI
+export const Tictactoe: React.FC = () => {
   const classes = useStyles();
 
   const translate = useTranslate();
 
-  const [player, setPlayer] = useState<Player>(Player.One);
+  const state = useGameState();
 
-  const [playerMoves, setPlayerMoves] = useState<number[][]>(
-    Array.from(Array(size), () => Array(size).fill(0))
-  );
+  const { game, size, showWinner, player, moveCount } = state.tictactoe;
 
-  const [showWinner, setShowWinner] = useState<boolean>(false);
+  const dispatchMove = useGameDispatch();
 
   const isMoveWin = (move: number, playerMoves: number[][]) => {
     const row = Math.floor(move / size);
@@ -58,8 +51,9 @@ export const Tictactoe: React.FC<{ size?: number }> = ({ size = 3 }) => {
     return winColumn || winRow || winDiagonal || winReverseDiagonal;
   };
 
-  const getMove = (move: number) =>
-    playerMoves[Math.floor(move / size)][move % size];
+  const getMove = (move: number) => {
+    return game ? game[Math.floor(move / size)][move % size] : undefined;
+  };
 
   const handleClick = (box: number) => () => {
     if (showWinner) {
@@ -70,15 +64,36 @@ export const Tictactoe: React.FC<{ size?: number }> = ({ size = 3 }) => {
       return;
     }
 
-    playerMoves[Math.floor(box / size)][box % size] = player;
-    setPlayerMoves(playerMoves);
+    game[Math.floor(box / size)][box % size] = player;
 
-    if (isMoveWin(box, playerMoves)) {
-      setShowWinner(true);
+    if (isMoveWin(box, game)) {
+      dispatchMove({
+        type: 'updateTictactoeGame',
+        state: {
+          ...state,
+          tictactoe: {
+            ...state.tictactoe,
+            game,
+            moveCount: state.tictactoe.moveCount + 1,
+            showWinner: true,
+          },
+        },
+      });
       return;
     }
 
-    setPlayer(-player as Player);
+    dispatchMove({
+      type: 'updateTictactoeGame',
+      state: {
+        ...state,
+        tictactoe: {
+          ...state.tictactoe,
+          game,
+          moveCount: state.tictactoe.moveCount + 1,
+          player: -player as TictactoePlayer,
+        },
+      },
+    });
   };
 
   const PlayerMove: React.FC<{
@@ -88,18 +103,20 @@ export const Tictactoe: React.FC<{ size?: number }> = ({ size = 3 }) => {
       return null;
     }
 
-    if (getMove(box) === Player.One) {
+    if (getMove(box) === TictactoePlayer.One) {
       return <RadioButtonUncheckedOutlined data-testid="circle" />;
     }
     return <CloseOutlined data-testid="cross" />;
   };
 
-  const PlayerMoveText: React.FC<{ player: Player }> = ({ player }) => {
+  const PlayerMoveText: React.FC<{ player: TictactoePlayer }> = ({
+    player,
+  }) => {
     return (
       <Typography className={classes.header} variant="h5" component="h2">
         {translate('playerCurrentMove', {
           player:
-            player === Player.One
+            player === TictactoePlayer.One
               ? translate('playerOne')
               : translate('playerTwo'),
         })}
@@ -113,24 +130,28 @@ export const Tictactoe: React.FC<{ size?: number }> = ({ size = 3 }) => {
         <Typography className={classes.header} variant="h5" component="h2">
           {translate('congratsWinner', {
             player:
-              player === Player.One
+              player === TictactoePlayer.One
                 ? translate('playerOne')
                 : translate('playerTwo'),
           })}
+        </Typography>
+      ) : moveCount === size * size ? (
+        <Typography className={classes.header} variant="h5" component="h2">
+          {translate('draw')}
         </Typography>
       ) : (
         <PlayerMoveText player={player} />
       )}
       <div className={classes.gameContainer}>
         <div className={classes.gameBoard}>
-          {range(0, size * size - 1).map((box) => (
+          {range(1, size * size).map((box) => (
             <Button
               key={uuid()}
               className={classes.box}
-              onClick={handleClick(box)}
+              onClick={handleClick(box - 1)}
             >
               <SvgIcon fontSize={'large'}>
-                <PlayerMove box={box} />
+                <PlayerMove box={box - 1} />
               </SvgIcon>
             </Button>
           ))}

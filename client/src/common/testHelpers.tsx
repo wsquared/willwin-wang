@@ -1,27 +1,35 @@
 import React from 'react';
-import { render, RenderResult } from '@testing-library/react';
+import { render, RenderResult, RenderOptions } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
 import { loadLocaleData } from 'lang';
 import mediaQuery from 'css-mediaquery';
+import { NewGameProvider } from 'stores';
 
-export const renderTestComponent = (
-  children: React.ReactElement,
-  { route } = { route: '/' }
+const renderTestComponent = (
+  ui: React.ReactElement,
+  { route } = { route: '/' },
+  options?: RenderOptions
 ): RenderResult => {
   window.history.pushState({}, 'Test page', route);
 
-  return render(
-    <BrowserRouter>
-      <IntlProvider
-        locale="en"
-        defaultLocale="en"
-        messages={loadLocaleData('en')}
-      >
-        {children}
-      </IntlProvider>
-    </BrowserRouter>
-  );
+  const Wrapper: React.FC = ({ children }) => {
+    return (
+      <BrowserRouter>
+        <NewGameProvider>
+          <IntlProvider
+            locale="en"
+            defaultLocale="en"
+            messages={loadLocaleData('en')}
+          >
+            {children}
+          </IntlProvider>
+        </NewGameProvider>
+      </BrowserRouter>
+    );
+  };
+
+  return render(ui, { wrapper: Wrapper, ...options });
 };
 
 export const createMatchMedia = (width: number) => (
@@ -36,3 +44,5 @@ export const createMatchMedia = (width: number) => (
   removeListener: () => undefined,
   dispatchEvent: () => true,
 });
+
+export { renderTestComponent };

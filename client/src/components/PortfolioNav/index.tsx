@@ -9,9 +9,10 @@ import {
   MenuItem,
 } from '@material-ui/core';
 import { ExitToApp, VideogameAsset, MenuOutlined } from '@material-ui/icons';
-import { useHistory } from 'react-router';
-import { PORTFOLIO_ROUTE } from 'routes';
+import { useHistory, useLocation } from 'react-router';
+import { PORTFOLIO_ROUTE, TICTACTOE_ROUTE } from 'routes';
 import { useTranslate } from 'hooks';
+import { useGameDispatch, TictactoePlayer } from 'stores';
 
 export const PortfolioNav: React.FC = () => {
   const useStyles = makeStyles((theme) => ({
@@ -32,9 +33,36 @@ export const PortfolioNav: React.FC = () => {
 
   const translate = useTranslate();
 
+  const location = useLocation();
+
   const history = useHistory();
 
+  const gameDispatch = useGameDispatch();
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+  const handleNewGameClick = () => {
+    if (location.pathname.indexOf(TICTACTOE_ROUTE)) {
+      const size = 3;
+
+      gameDispatch({
+        type: 'newTictactoeGame',
+        state: {
+          tictactoe: {
+            game: Array.from<number[], number[]>(Array(size), () =>
+              Array(size).fill(0)
+            ),
+            size,
+            showWinner: false,
+            player: TictactoePlayer.One,
+            moveCount: 0,
+          },
+        },
+      });
+    }
+
+    setAnchorEl(null);
+  };
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -69,7 +97,7 @@ export const PortfolioNav: React.FC = () => {
         onClose={handleClose}
         className={classes.menu}
       >
-        <MenuItem className={classes.menuItemRoot}>
+        <MenuItem className={classes.menuItemRoot} onClick={handleNewGameClick}>
           <ListItemIcon className={classes.menuItem}>
             <SvgIcon>
               <VideogameAsset />

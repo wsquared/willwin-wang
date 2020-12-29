@@ -5,9 +5,10 @@ import {
   makeStyles,
 } from '@material-ui/core';
 import { ExitToApp, VideogameAsset } from '@material-ui/icons';
-import { useHistory } from 'react-router-dom';
-import { PORTFOLIO_ROUTE } from 'routes';
+import { useHistory, useLocation } from 'react-router-dom';
+import { PORTFOLIO_ROUTE, TICTACTOE_ROUTE } from 'routes';
 import { useTranslate } from 'hooks';
+import { useGameDispatch, TictactoePlayer } from 'stores';
 
 export const PortfolioBottomNav: React.FC = () => {
   const useStyles = makeStyles((theme) => ({
@@ -30,6 +31,31 @@ export const PortfolioBottomNav: React.FC = () => {
 
   const history = useHistory();
 
+  const location = useLocation();
+
+  const gameDispatch = useGameDispatch();
+
+  const handleNewGameClick = () => {
+    if (location.pathname.indexOf(TICTACTOE_ROUTE)) {
+      const size = 3;
+
+      gameDispatch({
+        type: 'newTictactoeGame',
+        state: {
+          tictactoe: {
+            game: Array.from<number[], number[]>(Array(size), () =>
+              Array(size).fill(0)
+            ),
+            size,
+            showWinner: false,
+            player: TictactoePlayer.One,
+            moveCount: 0,
+          },
+        },
+      });
+    }
+  };
+
   return (
     <BottomNavigation className={classes.root}>
       <BottomNavigationAction
@@ -37,6 +63,7 @@ export const PortfolioBottomNav: React.FC = () => {
         value="New"
         icon={<VideogameAsset />}
         className={classes.navigationAction}
+        onClick={handleNewGameClick}
       />
       <BottomNavigationAction
         label={translate('exit')}

@@ -13,4 +13,5 @@ export const en = {
   playerOne: 'One',
   playerTwo: 'Two',
   playerCurrentMove: "Player {player}'s move",
+  draw: "Look's like it's a draw!",
 };
