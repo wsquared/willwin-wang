@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
+import { Grid, makeStyles } from '@material-ui/core';
 import { PortfolioCard } from 'components';
 import { v4 as uuid } from 'uuid';
 import { join as joinPath } from 'path';
@@ -9,28 +9,37 @@ import { Routes } from 'config';
 export const Portfolio: React.FC = () => {
   const translate = useTranslate();
 
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      [theme.breakpoints.up('md')]: {
+        paddingLeft: '25px',
+        paddingRight: '25px',
+      },
+    },
+  }));
+
+  const classes = useStyles();
+
   return (
-    <>
-      <Grid container spacing={3}>
-        <Grid item key={uuid()} xs={12} sm={12} md={6}>
-          <PortfolioCard
-            key={uuid()}
-            title={translate('tictactoeTitle')}
-            tsCodeLink={
-              'https://github.com/wsquared/willwin-wang/tree/master/client/src/pages/Tictactoe'
-            }
-            link={joinPath(Routes.portfolio, Routes.tictactoe)}
-          />
-        </Grid>
-        <Grid item key={uuid()} xs={12} sm={12} md={6}>
-          <PortfolioCard
-            key={uuid()}
-            tsCodeLink={'#'}
-            title={translate('sudokuTitle')}
-            link={joinPath(Routes.portfolio, Routes.sudoku)}
-          />
-        </Grid>
+    <Grid className={classes.root} container spacing={3}>
+      <Grid item key={uuid()} xs={12} sm={12} md={6}>
+        <PortfolioCard
+          key={uuid()}
+          title={translate('tictactoeTitle')}
+          tsCodeLink={
+            'https://github.com/wsquared/willwin-wang/tree/master/client/src/pages/Tictactoe'
+          }
+          link={joinPath(Routes.portfolio, Routes.tictactoe)}
+        />
       </Grid>
-    </>
+      <Grid item key={uuid()} xs={12} sm={12} md={6}>
+        <PortfolioCard
+          key={uuid()}
+          tsCodeLink={'#'}
+          title={translate('sudokuTitle')}
+          link={joinPath(Routes.portfolio, Routes.sudoku)}
+        />
+      </Grid>
+    </Grid>
   );
 };
