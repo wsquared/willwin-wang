@@ -4,7 +4,7 @@ import { PortfolioCard } from 'components';
 import { v4 as uuid } from 'uuid';
 import { join as joinPath } from 'path';
 import { useTranslate } from 'hooks';
-import { Routes } from 'config';
+import { Links, Routes } from 'config';
 
 export const Portfolio: React.FC = () => {
   const translate = useTranslate();
@@ -26,9 +26,8 @@ export const Portfolio: React.FC = () => {
         <PortfolioCard
           key={uuid()}
           title={translate('tictactoeTitle')}
-          tsCodeLink={
-            'https://github.com/wsquared/willwin-wang/tree/master/client/src/pages/Tictactoe'
-          }
+          tsCodeLink={Links.titactoeTsCode}
+          // pythonCodeLink={'#'}
           link={joinPath(Routes.portfolio, Routes.tictactoe)}
         />
       </Grid>
@@ -36,6 +35,7 @@ export const Portfolio: React.FC = () => {
         <PortfolioCard
           key={uuid()}
           tsCodeLink={'#'}
+          // pythonCodeLink={'#'}
           title={translate('sudokuTitle')}
           link={joinPath(Routes.portfolio, Routes.sudoku)}
         />

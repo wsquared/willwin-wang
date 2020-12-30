@@ -6,9 +6,12 @@ import {
   CardContent,
   Button,
   Typography,
+  SvgIcon,
 } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { useTranslate } from 'hooks';
+import { ReactComponent as TypescriptSvg } from 'icons/typescript/typescript-original.svg';
+// import { ReactComponent as PythonSvg } from 'icons/python/python-original.svg';
 
 const useStyles = makeStyles({
   cardActions: {
@@ -20,12 +23,14 @@ interface PortfolioCardProps extends React.HTMLAttributes<HTMLDivElement> {
   title: string;
   link: string;
   tsCodeLink: string;
+  // pythonCodeLink: string;
 }
 
 export const PortfolioCard: React.FC<PortfolioCardProps> = ({
   title,
   link,
   tsCodeLink,
+  // pythonCodeLink,
 }) => {
   const classes = useStyles();
 
@@ -48,9 +53,23 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
           href={tsCodeLink}
           rel="noreferrer noopener"
           target="_blank"
+          aria-label={translate('typescript')}
         >
-          {translate('viewCode')}
+          <SvgIcon>
+            <TypescriptSvg />
+          </SvgIcon>
         </Button>
+        {/* <Button
+          size="small"
+          href={pythonCodeLink}
+          rel="noreferrer noopener"
+          target="_blank"
+          aria-label={translate('python')}
+        >
+          <SvgIcon>
+            <PythonSvg />
+          </SvgIcon>
+        </Button> */}
         <Button size="small" onClick={handleClickPlay}>
           {translate('play')}
         </Button>

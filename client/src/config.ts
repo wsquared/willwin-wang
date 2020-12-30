@@ -3,6 +3,8 @@ export const Links = {
   twitter: 'https://twitter.com/willwin_w',
   gitHub: 'https://github.com/wsquared',
   linkedIn: 'https://linkedin.com/in/willwinwang',
+  titactoeTsCode:
+    'https://github.com/wsquared/willwin-wang/tree/master/client/src/pages/Tictactoe',
 };
 
 export const Routes = {

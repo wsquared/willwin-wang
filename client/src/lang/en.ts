@@ -9,7 +9,6 @@ export const en = {
   new: 'New',
   tictactoeTitle: 'Tictactoe',
   sudokuTitle: 'Sudoku',
-  viewCode: '<View code>',
   congratsWinner: "Congrat's Player {player}, you just won!",
   playerOne: 'One',
   playerTwo: 'Two',
@@ -24,4 +23,6 @@ export const en = {
   gitHub: 'gitHub',
   twitter: 'twitter',
   aboutDescription: 'Live. Eat. Code. Dance. Sleep. Repeat.',
+  typescript: 'typescript',
+  python: 'python',
 };

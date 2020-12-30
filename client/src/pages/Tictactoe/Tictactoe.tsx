@@ -10,8 +10,6 @@ import { range } from 'common';
 import { useTranslate } from 'hooks';
 import { useGameState, useGameDispatch, TictactoePlayer } from 'stores';
 
-// TODO: Add about me
-// TODO: Update portfolio <typescript>
 // TODO: Add analytics
 // TODO: Implement score
 // TODO: Implement AI
