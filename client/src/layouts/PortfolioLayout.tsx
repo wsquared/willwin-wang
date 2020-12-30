@@ -8,12 +8,23 @@ import {
 import { PortfolioBottomNav, PortfolioNav } from 'components';
 
 export const PortfolioLayout: React.FC = ({ children }) => {
-  const useStyles = makeStyles({
+  const useStyles = makeStyles((theme) => ({
     root: {
-      marginTop: '50px',
-      marginBottom: '50px',
+      [theme.breakpoints.up('lg')]: {
+        marginTop: '50px',
+        marginBottom: '50px',
+      },
+      [theme.breakpoints.down('md')]: {
+        marginTop: '35px',
+        marginBottom: '35px',
+      },
+      [theme.breakpoints.down('xs')]: {
+        marginTop: '20px',
+        marginBottom: '20px;',
+      },
+      height: '100%',
     },
-  });
+  }));
 
   const classes = useStyles();
 
@@ -23,21 +34,17 @@ export const PortfolioLayout: React.FC = ({ children }) => {
 
   if (matches) {
     return (
-      <>
-        <Container maxWidth="lg" className={classes.root}>
-          <PortfolioNav />
-          <>{children}</>
-        </Container>
-      </>
+      <Container maxWidth="lg" className={classes.root}>
+        <PortfolioNav />
+        <>{children}</>
+      </Container>
     );
   }
 
   return (
-    <>
-      <Container maxWidth="lg" className={classes.root}>
-        <PortfolioBottomNav />
-        <>{children}</>
-      </Container>
-    </>
+    <Container maxWidth="lg" className={classes.root}>
+      <PortfolioBottomNav />
+      <>{children}</>
+    </Container>
   );
 };

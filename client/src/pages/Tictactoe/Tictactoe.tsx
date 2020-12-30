@@ -126,7 +126,7 @@ export const Tictactoe: React.FC = () => {
   };
 
   return (
-    <div>
+    <main className={classes.root}>
       {showWinner ? (
         <Typography className={classes.header} variant="h5" component="h2">
           {translate('congratsWinner', {
@@ -160,6 +160,6 @@ export const Tictactoe: React.FC = () => {
           ))}
         </div>
       </div>
-    </div>
+    </main>
   );
 };
