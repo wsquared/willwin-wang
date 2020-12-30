@@ -26,11 +26,11 @@ describe('Given PortfolioCard', () => {
       />
     );
 
-    expect(screen.getByText(/view code/i).closest('a')).toHaveAttribute(
+    expect(screen.getByLabelText(/typescript/i).closest('a')).toHaveAttribute(
       'href',
       tsCodeLink
     );
-    expect(screen.getByText(/view code/i).closest('a')).toHaveAttribute(
+    expect(screen.getByLabelText(/typescript/i).closest('a')).toHaveAttribute(
       'target',
       '_blank'
     );
