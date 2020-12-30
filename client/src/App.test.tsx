@@ -3,6 +3,8 @@ import { screen } from '@testing-library/react';
 import App from './App';
 import { renderTestComponent } from 'common';
 
+jest.mock('react-ga');
+
 describe('App', () => {
   beforeAll(() => {
     window.scrollTo = jest.fn();
