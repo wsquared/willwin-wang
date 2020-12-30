@@ -27,7 +27,7 @@ describe('App', () => {
   it('renders about page', () => {
     renderTestComponent(<App />, { route: '/about' });
 
-    const element = screen.getByText(/about/i);
+    const element = screen.getByText(/live/i);
 
     expect(element).toBeInTheDocument();
   });

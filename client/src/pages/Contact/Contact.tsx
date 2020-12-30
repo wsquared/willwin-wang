@@ -5,7 +5,7 @@ import { Links } from 'config';
 import { useTranslate } from 'hooks';
 
 export const Contact: React.FC = () => {
-  const useStyles = makeStyles({
+  const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
       justifyContent: 'center',
@@ -15,9 +15,11 @@ export const Contact: React.FC = () => {
       height: '100%',
     },
     button: {
-      margin: '0 8px 0 8px',
+      [theme.breakpoints.up('md')]: {
+        margin: '0 8px 0 8px',
+      },
     },
-  });
+  }));
 
   const classes = useStyles();
 

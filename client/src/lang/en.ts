@@ -23,4 +23,5 @@ export const en = {
   linkedIn: 'linkedIn',
   gitHub: 'gitHub',
   twitter: 'twitter',
+  aboutDescription: 'Live. Eat. Code. Dance. Sleep. Repeat.',
 };
