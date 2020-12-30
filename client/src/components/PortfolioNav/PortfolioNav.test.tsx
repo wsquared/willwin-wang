@@ -2,8 +2,8 @@ import { fireEvent, screen } from '@testing-library/react';
 import React from 'react';
 import { PortfolioNav } from './PortfolioNav';
 import { renderTestComponent } from 'common';
-import { PORTFOLIO_ROUTE } from 'routes';
 import { useGameState } from 'stores';
+import { Routes } from 'config';
 
 describe('PortfolioNav', () => {
   describe('When I click on exit', () => {
@@ -12,7 +12,7 @@ describe('PortfolioNav', () => {
 
       fireEvent.click(screen.getByText(/exit/gi));
 
-      expect(window.location.pathname).toBe(PORTFOLIO_ROUTE);
+      expect(window.location.pathname).toBe(Routes.portfolio);
     });
   });
 

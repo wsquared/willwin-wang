@@ -2,7 +2,7 @@ import React from 'react';
 import { fireEvent, screen } from '@testing-library/react';
 import { FloatingNav } from './FloatingNav';
 import { renderTestComponent } from 'common';
-import { ABOUT_ROUTE, CONTACT_ROUTE } from 'routes';
+import { Routes } from 'config';
 
 describe('FloatNav', () => {
   it('should have back and forward arrow', () => {
@@ -18,7 +18,7 @@ describe('FloatNav', () => {
 
       fireEvent.click(screen.getByTitle(/back/gi));
 
-      expect(window.location.pathname).toBe(CONTACT_ROUTE);
+      expect(window.location.pathname).toBe(Routes.contact);
     });
   });
 
@@ -28,7 +28,7 @@ describe('FloatNav', () => {
 
       fireEvent.click(screen.getByTitle(/forward/gi));
 
-      expect(window.location.pathname).toBe(ABOUT_ROUTE);
+      expect(window.location.pathname).toBe(Routes.about);
     });
   });
 });

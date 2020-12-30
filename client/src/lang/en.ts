@@ -19,4 +19,8 @@ export const en = {
   name: 'Willwin Wang',
   forwardArrow: 'Forward arrow',
   backArrow: 'Back arrow',
+  email: 'email',
+  linkedIn: 'linkedIn',
+  gitHub: 'gitHub',
+  twitter: 'twitter',
 };

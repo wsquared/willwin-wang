@@ -2,9 +2,9 @@ import React from 'react';
 import { Grid } from '@material-ui/core';
 import { PortfolioCard } from 'components';
 import { v4 as uuid } from 'uuid';
-import { TICTACTOE_ROUTE, SUDOKU_ROUTE, PORTFOLIO_ROUTE } from 'routes';
 import { join as joinPath } from 'path';
 import { useTranslate } from 'hooks';
+import { Routes } from 'config';
 
 export const Portfolio: React.FC = () => {
   const translate = useTranslate();
@@ -19,7 +19,7 @@ export const Portfolio: React.FC = () => {
             tsCodeLink={
               'https://github.com/wsquared/willwin-wang/tree/master/client/src/pages/Tictactoe'
             }
-            link={joinPath(PORTFOLIO_ROUTE, TICTACTOE_ROUTE)}
+            link={joinPath(Routes.portfolio, Routes.tictactoe)}
           />
         </Grid>
         <Grid item key={uuid()} xs={12} sm={12} md={6}>
@@ -27,7 +27,7 @@ export const Portfolio: React.FC = () => {
             key={uuid()}
             tsCodeLink={'#'}
             title={translate('sudokuTitle')}
-            link={joinPath(PORTFOLIO_ROUTE, SUDOKU_ROUTE)}
+            link={joinPath(Routes.portfolio, Routes.sudoku)}
           />
         </Grid>
       </Grid>

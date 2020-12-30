@@ -2,12 +2,7 @@ import React from 'react';
 import { ArrowBackOutlined, ArrowForwardOutlined } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import {
-  CONTACT_ROUTE,
-  HOME_ROUTE,
-  PORTFOLIO_ROUTE,
-  ABOUT_ROUTE,
-} from 'routes';
+import { Routes } from 'config';
 import { DoubleLinkedListNode } from 'common';
 import { useTranslate } from 'hooks';
 
@@ -52,10 +47,10 @@ export const FloatingNav: React.FC = () => {
   };
 
   const routesMap = buildDoubleLinkedListNodes([
-    HOME_ROUTE,
-    ABOUT_ROUTE,
-    PORTFOLIO_ROUTE,
-    CONTACT_ROUTE,
+    Routes.home,
+    Routes.about,
+    Routes.portfolio,
+    Routes.contact,
   ]);
 
   const classes = useStyles();
@@ -63,7 +58,7 @@ export const FloatingNav: React.FC = () => {
   const translate = useTranslate();
 
   const currentRouteNode = routesMap.get(
-    history.location.pathname === '/' ? HOME_ROUTE : history.location.pathname
+    history.location.pathname === '/' ? Routes.home : history.location.pathname
   );
 
   const handleClickLeft = () => history.push(currentRouteNode?.prev?.val || '');

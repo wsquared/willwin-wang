@@ -57,8 +57,6 @@ describe('App', () => {
   it('renders contact page', () => {
     renderTestComponent(<App />, { route: '/contact' });
 
-    const element = screen.getByText(/contact/i);
-
-    expect(element).toBeInTheDocument();
+    expect(screen.getByLabelText(/email/gi)).toBeInTheDocument();
   });
 });

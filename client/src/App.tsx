@@ -17,14 +17,7 @@ import {
   Sudoku,
   NotFound,
 } from 'pages';
-import {
-  ABOUT_ROUTE,
-  CONTACT_ROUTE,
-  HOME_ROUTE,
-  PORTFOLIO_ROUTE,
-  SUDOKU_ROUTE,
-  TICTACTOE_ROUTE,
-} from 'routes';
+import { Routes } from 'config';
 import { DefaultLayout, PortfolioLayout } from 'layouts';
 import { NewGameProvider } from 'stores';
 
@@ -64,33 +57,33 @@ const App: React.FC = () => {
                 <Home />
               </DefaultLayout>
             </Route>
-            <Route exact path={HOME_ROUTE}>
+            <Route exact path={Routes.home}>
               <DefaultLayout>
                 <Home />
               </DefaultLayout>
             </Route>
-            <Route exact path={ABOUT_ROUTE}>
+            <Route exact path={Routes.about}>
               <DefaultLayout>
                 <About />
               </DefaultLayout>
             </Route>
-            <Route exact path={CONTACT_ROUTE}>
+            <Route exact path={Routes.contact}>
               <DefaultLayout>
                 <Contact />
               </DefaultLayout>
             </Route>
             <NewGameProvider>
-              <Route exact path={PORTFOLIO_ROUTE}>
+              <Route exact path={Routes.portfolio}>
                 <DefaultLayout>
                   <Portfolio />
                 </DefaultLayout>
               </Route>
-              <Route exact path={`${PORTFOLIO_ROUTE}${TICTACTOE_ROUTE}`}>
+              <Route exact path={`${Routes.portfolio}${Routes.tictactoe}`}>
                 <PortfolioLayout>
                   <Tictactoe />
                 </PortfolioLayout>
               </Route>
-              <Route exact path={`${PORTFOLIO_ROUTE}${SUDOKU_ROUTE}`}>
+              <Route exact path={`${Routes.portfolio}${Routes.sudoku}`}>
                 <PortfolioLayout>
                   <Sudoku />
                 </PortfolioLayout>

@@ -2,42 +2,38 @@ import { fireEvent, screen } from '@testing-library/react';
 import React from 'react';
 import { PortfolioCard } from './PortfolioCard';
 import { renderTestComponent } from 'common';
-import { TICTACTOE_ROUTE } from 'routes';
+import { Routes } from 'config';
 
 describe('Given PortfolioCard', () => {
   it('should display title text', () => {
     const title = 'Tictactoe';
 
     renderTestComponent(
-      <PortfolioCard title={title} tsCodeLink={'#'} link={TICTACTOE_ROUTE} />
+      <PortfolioCard title={title} tsCodeLink={'#'} link={Routes.tictactoe} />
     );
 
     expect(screen.getByText(title)).toBeInTheDocument();
   });
 
-  describe('When I click on view code', () => {
-    it('should have href to code repo and target _blank', () => {
-      const tsCodeLink = '/coderepo';
+  it('should have href to code repo and target _blank', () => {
+    const tsCodeLink = '/coderepo';
 
-      renderTestComponent(
-        <PortfolioCard
-          tsCodeLink={tsCodeLink}
-          title={'Tictactoe'}
-          link={TICTACTOE_ROUTE}
-        />
-      );
+    renderTestComponent(
+      <PortfolioCard
+        tsCodeLink={tsCodeLink}
+        title={'Tictactoe'}
+        link={Routes.tictactoe}
+      />
+    );
 
-      fireEvent.click(screen.getByText(/view code/i));
-
-      expect(screen.getByText(/view code/i).closest('a')).toHaveAttribute(
-        'href',
-        tsCodeLink
-      );
-      expect(screen.getByText(/view code/i).closest('a')).toHaveAttribute(
-        'target',
-        '_blank'
-      );
-    });
+    expect(screen.getByText(/view code/i).closest('a')).toHaveAttribute(
+      'href',
+      tsCodeLink
+    );
+    expect(screen.getByText(/view code/i).closest('a')).toHaveAttribute(
+      'target',
+      '_blank'
+    );
   });
 
   describe('When I click on play tictactoe', () => {
@@ -46,13 +42,13 @@ describe('Given PortfolioCard', () => {
         <PortfolioCard
           tsCodeLink={'#'}
           title={'Tictactoe'}
-          link={TICTACTOE_ROUTE}
+          link={Routes.tictactoe}
         />
       );
 
       fireEvent.click(screen.getByText(/play/i));
 
-      expect(window.location.pathname).toBe(TICTACTOE_ROUTE);
+      expect(window.location.pathname).toBe(Routes.tictactoe);
     });
   });
 });

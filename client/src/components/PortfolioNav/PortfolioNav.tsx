@@ -10,9 +10,9 @@ import {
 } from '@material-ui/core';
 import { ExitToApp, VideogameAsset, MenuOutlined } from '@material-ui/icons';
 import { useHistory, useLocation } from 'react-router';
-import { PORTFOLIO_ROUTE, TICTACTOE_ROUTE } from 'routes';
 import { useTranslate } from 'hooks';
 import { useGameDispatch, TictactoePlayer } from 'stores';
+import { Routes } from 'config';
 
 export const PortfolioNav: React.FC = () => {
   const useStyles = makeStyles((theme) => ({
@@ -42,7 +42,7 @@ export const PortfolioNav: React.FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleNewGameClick = () => {
-    if (location.pathname.indexOf(TICTACTOE_ROUTE)) {
+    if (location.pathname.indexOf(Routes.tictactoe)) {
       const size = 3;
 
       gameDispatch({
@@ -114,7 +114,7 @@ export const PortfolioNav: React.FC = () => {
           />
         </MenuItem>
         <MenuItem
-          onClick={() => history.push(PORTFOLIO_ROUTE)}
+          onClick={() => history.push(Routes.portfolio)}
           className={classes.menuItemRoot}
         >
           <ListItemIcon className={classes.menuItem}>

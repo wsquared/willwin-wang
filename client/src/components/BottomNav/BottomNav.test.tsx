@@ -2,7 +2,7 @@ import React from 'react';
 import { fireEvent, waitFor } from '@testing-library/react';
 import { BottomNav } from './BottomNav';
 import { renderTestComponent, createMatchMedia } from 'common';
-import { PORTFOLIO_ROUTE } from 'routes';
+import { Routes } from 'config';
 
 describe('Given BottomNav', () => {
   let matchMedia: ((query: string) => MediaQueryList) &
@@ -40,7 +40,7 @@ describe('Given BottomNav', () => {
   describe('When I click on portfolio', () => {
     it('should route to portfolio', () => {
       const { getByText } = renderTestComponent(<BottomNav />, {
-        route: PORTFOLIO_ROUTE,
+        route: Routes.portfolio,
       });
 
       waitFor(() => fireEvent.click(getByText(/portfolio/i)));
@@ -52,7 +52,7 @@ describe('Given BottomNav', () => {
   describe('When I click on contact', () => {
     it('should route to contact', () => {
       const { getByText } = renderTestComponent(<BottomNav />, {
-        route: PORTFOLIO_ROUTE,
+        route: Routes.portfolio,
       });
 
       waitFor(() => fireEvent.click(getByText(/contact/i)));
