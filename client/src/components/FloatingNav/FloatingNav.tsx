@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ArrowBackOutlined, ArrowForwardOutlined } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -66,8 +66,22 @@ export const FloatingNav: React.FC = () => {
   const handleClickRight = () =>
     history.push(currentRouteNode?.next?.val || '');
 
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'ArrowRight') {
+      handleClickRight();
+    } else if (event.key === 'ArrowLeft') {
+      handleClickLeft();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  });
+
   return (
-    <>
+    <div>
       <ArrowBackOutlined
         titleAccess={translate('backArrow')}
         className={classes.arrowLeft}
@@ -79,6 +93,6 @@ export const FloatingNav: React.FC = () => {
         className={classes.arrowRight}
         onClick={handleClickRight}
       />
-    </>
+    </div>
   );
 };
