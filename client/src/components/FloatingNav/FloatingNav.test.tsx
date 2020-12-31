@@ -4,6 +4,8 @@ import { FloatingNav } from './FloatingNav';
 import { renderTestComponent } from 'common';
 import { Routes } from 'config';
 
+jest.mock('react-ga');
+
 describe('FloatNav', () => {
   it('should have back and forward arrow', () => {
     renderTestComponent(<FloatingNav />);

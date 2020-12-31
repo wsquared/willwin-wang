@@ -4,6 +4,8 @@ import { PortfolioCard } from './PortfolioCard';
 import { renderTestComponent } from 'common';
 import { Routes } from 'config';
 
+jest.mock('react-ga');
+
 describe('Given PortfolioCard', () => {
   it('should display title text', () => {
     const title = 'Tictactoe';

@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactGA from 'react-ga';
 import {
   makeStyles,
   Button,
@@ -59,17 +60,40 @@ export const PortfolioNav: React.FC = () => {
           },
         },
       });
+
+      ReactGA.event({
+        category: 'New Game',
+        action: 'Clicked new game for tictactoe',
+      });
     }
 
     setAnchorEl(null);
   };
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+  const gameMap = new Map<string, string>([
+    [`${Routes.portfolio}${Routes.tictactoe}`, 'tictactoe'],
+  ]);
+
+  const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
+    ReactGA.event({
+      category: 'Menu',
+      action: `Clicked menu from ${gameMap.get(location.pathname)}`,
+    });
+
     setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleExitClick = () => {
+    history.push(Routes.portfolio);
+
+    ReactGA.event({
+      category: 'Exit Game',
+      action: `Clicked exit from ${gameMap.get(location.pathname)}`,
+    });
   };
 
   return (
@@ -78,7 +102,7 @@ export const PortfolioNav: React.FC = () => {
         aria-controls="menu"
         aria-haspopup="true"
         aria-label={translate('menu')}
-        onClick={handleClick}
+        onClick={handleMenuClick}
       >
         <SvgIcon>
           <MenuOutlined />
@@ -113,10 +137,7 @@ export const PortfolioNav: React.FC = () => {
             primary={translate('new')}
           />
         </MenuItem>
-        <MenuItem
-          onClick={() => history.push(Routes.portfolio)}
-          className={classes.menuItemRoot}
-        >
+        <MenuItem onClick={handleExitClick} className={classes.menuItemRoot}>
           <ListItemIcon className={classes.menuItem}>
             <SvgIcon>
               <ExitToApp />

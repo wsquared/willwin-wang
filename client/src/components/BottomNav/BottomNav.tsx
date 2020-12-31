@@ -7,6 +7,7 @@ import {
 import { Home, Folder, Person, ContactMail } from '@material-ui/icons';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useTranslate } from 'hooks';
+import ReactGA from 'react-ga';
 
 const BottomNav: React.FC = () => {
   const useStyles = makeStyles({
@@ -34,6 +35,11 @@ const BottomNav: React.FC = () => {
     _: React.ChangeEvent<Record<string, unknown>>,
     newValue: string
   ) => {
+    ReactGA.event({
+      category: 'Bottom Navigation Links',
+      action: `Clicked bottom navigation ${newValue}`,
+      label: `Navigated to ${newValue}`,
+    });
     setValue(newValue);
     history.push(`/${newValue}`);
   };

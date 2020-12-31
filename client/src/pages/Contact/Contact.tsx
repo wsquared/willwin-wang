@@ -3,6 +3,7 @@ import { Container, SvgIcon, Button, makeStyles } from '@material-ui/core';
 import { Twitter, LinkedIn, Email, GitHub } from '@material-ui/icons';
 import { Links } from 'config';
 import { useTranslate } from 'hooks';
+import ReactGA from 'react-ga';
 
 export const Contact: React.FC = () => {
   const useStyles = makeStyles((theme) => ({
@@ -25,6 +26,10 @@ export const Contact: React.FC = () => {
 
   const translate = useTranslate();
 
+  const handleClick = (label: string) => () => {
+    ReactGA.event({ category: 'Contact links', action: `Clicked ${label}` });
+  };
+
   return (
     <Container className={classes.root}>
       <main>
@@ -34,6 +39,7 @@ export const Contact: React.FC = () => {
           rel="noreferrer noopener"
           target="_blank"
           aria-label={translate('email')}
+          onClick={handleClick(translate('email'))}
         >
           <SvgIcon fontSize="large">
             <Email />
@@ -45,6 +51,7 @@ export const Contact: React.FC = () => {
           rel="noreferrer noopener"
           target="_blank"
           aria-label={translate('linkedIn')}
+          onClick={handleClick(translate('linkedIn'))}
         >
           <SvgIcon fontSize="large">
             <LinkedIn />
@@ -56,6 +63,7 @@ export const Contact: React.FC = () => {
           rel="noreferrer noopener"
           target="_blank"
           aria-label={translate('twitter')}
+          onClick={handleClick(translate('twitter'))}
         >
           <SvgIcon fontSize="large">
             <Twitter />
@@ -67,6 +75,7 @@ export const Contact: React.FC = () => {
           rel="noreferrer noopener"
           target="_blank"
           aria-label={translate('gitHub')}
+          onClick={handleClick(translate('gitHub'))}
         >
           <SvgIcon fontSize="large">
             <GitHub />

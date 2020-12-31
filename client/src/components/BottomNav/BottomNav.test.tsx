@@ -4,6 +4,8 @@ import { BottomNav } from './BottomNav';
 import { renderTestComponent, createMatchMedia } from 'common';
 import { Routes } from 'config';
 
+jest.mock('react-ga');
+
 describe('Given BottomNav', () => {
   let matchMedia: ((query: string) => MediaQueryList) &
     ((query: string) => MediaQueryList);

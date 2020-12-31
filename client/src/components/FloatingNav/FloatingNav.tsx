@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Routes } from 'config';
 import { DoubleLinkedListNode } from 'common';
 import { useTranslate } from 'hooks';
+import ReactGA from 'react-ga';
 
 export const FloatingNav: React.FC = () => {
   const history = useHistory();
@@ -61,16 +62,39 @@ export const FloatingNav: React.FC = () => {
     history.location.pathname === '/' ? Routes.home : history.location.pathname
   );
 
-  const handleClickLeft = () => history.push(currentRouteNode?.prev?.val || '');
+  const handleClickLeft = () => {
+    history.push(currentRouteNode?.prev?.val || '');
+    ReactGA.event({
+      category: 'Floating Navigation Links',
+      action: 'Clicked left arrow',
+      label: `Navigated left to ${currentRouteNode?.prev?.val}`,
+    });
+  };
 
-  const handleClickRight = () =>
+  const handleClickRight = () => {
     history.push(currentRouteNode?.next?.val || '');
+    ReactGA.event({
+      category: 'Floating Navigation Links',
+      action: 'Clicked right arrow',
+      label: `Navigated right to ${currentRouteNode?.next?.val}`,
+    });
+  };
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === 'ArrowRight') {
-      handleClickRight();
+      history.push(currentRouteNode?.next?.val || '');
+      ReactGA.event({
+        category: 'Floating Navigation Keys',
+        action: 'Pressed ArrowRight',
+        label: `Navigated right to ${currentRouteNode?.next?.val}`,
+      });
     } else if (event.key === 'ArrowLeft') {
-      handleClickLeft();
+      history.push(currentRouteNode?.prev?.val || '');
+      ReactGA.event({
+        category: 'Floating Navigation Keys',
+        action: 'Pressed ArrowLeft',
+        label: `Navigated left to ${currentRouteNode?.prev?.val}`,
+      });
     }
   };
 

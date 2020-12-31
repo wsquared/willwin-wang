@@ -20,7 +20,7 @@ import {
 import { Routes } from 'config';
 import { DefaultLayout, PortfolioLayout } from 'layouts';
 import { NewGameProvider } from 'stores';
-import { PageGoogleAnalytics } from 'analytics';
+import { PageGoogleAnalytics } from 'components/PageGoogleAnalytics';
 
 const App: React.FC = () => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');

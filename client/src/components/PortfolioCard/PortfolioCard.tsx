@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactGA from 'react-ga';
 import {
   makeStyles,
   Card,
@@ -38,7 +39,20 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
 
   const translate = useTranslate();
 
-  const handleClickPlay = () => history.push(link);
+  const handleClickPlay = (label: string) => () => {
+    ReactGA.event({
+      category: 'Play',
+      action: `Clicked ${label}`,
+    });
+
+    history.push(link);
+  };
+
+  const handleClickTsLink = (label: string) => () =>
+    ReactGA.event({
+      category: 'View Typescript Code',
+      action: `Clicked ${label}`,
+    });
 
   return (
     <Card>
@@ -54,6 +68,7 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
           rel="noreferrer noopener"
           target="_blank"
           aria-label={translate('typescript')}
+          onClick={handleClickTsLink(translate('typescript'))}
         >
           <SvgIcon>
             <TypescriptSvg />
@@ -70,7 +85,7 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
             <PythonSvg />
           </SvgIcon>
         </Button> */}
-        <Button size="small" onClick={handleClickPlay}>
+        <Button size="small" onClick={handleClickPlay(title)}>
           {translate('play')}
         </Button>
       </CardActions>

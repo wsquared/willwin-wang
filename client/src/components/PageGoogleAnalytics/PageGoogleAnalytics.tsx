@@ -3,7 +3,7 @@ import ReactGA from 'react-ga';
 import { useLocation } from 'react-router-dom';
 
 export const PageGoogleAnalytics: React.FC = ({ children }) => {
-  ReactGA.initialize(process.env.REACT_APP_GA_MEASUREMENT_ID || '');
+  ReactGA.initialize(process.env.REACT_APP_GA_MEASUREMENT_ID as string);
 
   const location = useLocation();
 

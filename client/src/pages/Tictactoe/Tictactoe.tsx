@@ -10,7 +10,6 @@ import { range } from 'common';
 import { useTranslate } from 'hooks';
 import { useGameState, useGameDispatch, TictactoePlayer } from 'stores';
 
-// TODO: Add analytics
 // TODO: Implement score
 // TODO: Implement AI
 export const Tictactoe: React.FC = () => {
