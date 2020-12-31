@@ -5,6 +5,8 @@ import { renderTestComponent } from 'common';
 import { useGameState } from 'stores';
 import { Routes } from 'config';
 
+jest.mock('react-ga');
+
 describe('PortfolioNav', () => {
   describe('When I click on exit', () => {
     it('should route back to portfolio', () => {
