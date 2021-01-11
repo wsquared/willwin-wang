@@ -9,10 +9,12 @@ const Home: React.FC = () => {
       justifyContent: 'center',
       alignItems: 'center',
       [theme.breakpoints.up('md')]: {
-        height: '100vh',
+        height: '100%',
       },
       [theme.breakpoints.down('sm')]: {
-        height: '75vh',
+        marginTop: '-50px',
+        marginBottom: '-50px',
+        height: '100%',
       },
     },
     typographyContainer: {

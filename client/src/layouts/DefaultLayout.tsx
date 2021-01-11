@@ -7,6 +7,9 @@ import { Routes } from 'config';
 
 export const DefaultLayout: React.FC = ({ children }) => {
   const useStyles = makeStyles({
+    main: {
+      height: '100%',
+    },
     desktop: {
       marginTop: '50px',
       marginBottom: '50px',
@@ -34,7 +37,9 @@ export const DefaultLayout: React.FC = ({ children }) => {
       <>
         <Container
           maxWidth="lg"
-          className={matchesHome.test(location.pathname) ? '' : classes.desktop}
+          className={
+            matchesHome.test(location.pathname) ? classes.main : classes.desktop
+          }
         >
           <>{children}</>
           <FloatingNav />

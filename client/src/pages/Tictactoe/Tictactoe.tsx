@@ -5,7 +5,6 @@ import {
   CloseOutlined,
 } from '@material-ui/icons';
 import { useStyles } from './Tictactoe.styles';
-import { v4 as uuid } from 'uuid';
 import { range } from 'common';
 import { useTranslate } from 'hooks';
 import { useGameState, useGameDispatch, TictactoePlayer } from 'stores';
@@ -144,7 +143,7 @@ export const Tictactoe: React.FC = () => {
         <div className={classes.gameBoard}>
           {range(1, size * size).map((box) => (
             <Button
-              key={uuid()}
+              key={box}
               className={classes.box}
               onClick={handleClick(box - 1)}
               role={'button'}
