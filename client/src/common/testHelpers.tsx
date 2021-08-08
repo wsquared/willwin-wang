@@ -32,17 +32,18 @@ const renderTestComponent = (
   return render(ui, { wrapper: Wrapper, ...options });
 };
 
-export const createMatchMedia = (width: number) => (
-  query: string
-): MediaQueryList => ({
-  matches: mediaQuery.match(query, { width }),
-  addEventListener: () => undefined,
-  removeEventListener: () => undefined,
-  media: '',
-  onchange: () => undefined,
-  addListener: () => undefined,
-  removeListener: () => undefined,
-  dispatchEvent: () => true,
-});
+/* eslint-disable indent */
+export const createMatchMedia =
+  (width: number) =>
+  (query: string): MediaQueryList => ({
+    matches: mediaQuery.match(query, { width }),
+    addEventListener: () => undefined,
+    removeEventListener: () => undefined,
+    media: '',
+    onchange: () => undefined,
+    addListener: () => undefined,
+    removeListener: () => undefined,
+    dispatchEvent: () => true,
+  });
 
 export { renderTestComponent };
