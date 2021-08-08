@@ -4,7 +4,7 @@ orbs:
 jobs:
   test:
     docker:
-      - image: 'cimg/node:16.6.1'
+      - image: 'cimg/node:16.6'
     steps:
       - checkout
       - node/install-npm
@@ -32,7 +32,7 @@ jobs:
             - infrastructure
   build_and_deploy:
     docker:
-      - image: 'cimg/node:16.6.1'
+      - image: 'cimg/node:16.6'
     steps:
       - attach_workspace:
           # Must be absolute path or relative path from working_directory
