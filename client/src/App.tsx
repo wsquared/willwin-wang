@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import {
-  createMuiTheme,
+  createTheme,
   ThemeProvider,
   useMediaQuery,
   CssBaseline,
@@ -27,7 +27,7 @@ const App: React.FC = () => {
 
   const theme = React.useMemo(
     () =>
-      createMuiTheme({
+      createTheme({
         typography: {
           fontFamily: ['poppins', 'Helvetica', 'sans-serif', 'Arial'].join(','),
         },
