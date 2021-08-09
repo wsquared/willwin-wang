@@ -10,10 +10,12 @@ jobs:
       - node/install-npm
       - node/install-packages:
           app-dir: ~/project/client
+          cache-version: willwin-wang-{{ checksum "~/project/client/package-lock.json" }}
           cache-path: ~/project/client/node_modules
           override-ci-command: npm i
       - node/install-packages:
           app-dir: ~/project/infrastructure
+          cache-version: willwin-wang-{{ checksum "~/project/infrastructure/package-lock.json" }}
           cache-path: ~/project/infrastructure/node_modules
           override-ci-command: npm i
       - run:
