@@ -27,7 +27,7 @@ jobs:
           cache-version: willwin-wang-{{ checksum "~/project/client/package-lock.json" }}
       - run:
           working_directory: ~/project/client
-          name: Build assets for production
+          name: build assets for production
           command: npm run build
       - persist_to_workspace:
           # Must be an absolute path, or relative path from working_directory
@@ -35,11 +35,14 @@ jobs:
           # Must be relative path from root
           paths:
             - client
+            - infrastructure
   deploy_assets:
     docker:
       - image: 'cimg/node:16.6'
     steps:
-      - checkout
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: .
       - node/install-packages:
           app-dir: ~/project/infrastructure
           cache-version: willwin-wang-{{ checksum "~/project/infrastructure/package-lock.json" }}
