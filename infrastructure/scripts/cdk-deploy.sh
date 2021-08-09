@@ -7,6 +7,7 @@ if [[ $# -ge 5 ]]; then
     export SUBDOMAIN=$4
     export SITE_CONTENTS_PATH=$5
     shift; shift; shift; shift; shift
+    npx cdk bootstrap
     npx cdk deploy "$@" --require-approval=never
     exit $?
 else
