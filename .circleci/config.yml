@@ -36,9 +36,18 @@ jobs:
     docker:
       - image: 'cimg/node:16.6'
     steps:
-      - attach_workspace:
-          # Must be absolute path or relative path from working_directory
-          at: .
+      - checkout
+      - node/install-npm
+      - node/install-packages:
+          app-dir: ~/project/client
+          cache-version: willwin-wang-{{ checksum "~/project/client/package-lock.json" }}
+          cache-path: ~/project/client/node_modules
+          override-ci-command: npm install --immutable
+      - node/install-packages:
+          app-dir: ~/project/infrastructure
+          cache-version: willwin-wang-{{ checksum "~/project/infrastructure/package-lock.json" }}
+          cache-path: ~/project/infrastructure/node_modules
+          override-ci-command: npm install --immutable
       - run:
           working_directory: ~/project/client
           name: Build assets for production
@@ -63,3 +72,5 @@ workflows:
             branches:
               only:
                 - master
+          requires:
+            - test
