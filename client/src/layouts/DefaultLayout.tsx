@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, useTheme, useMediaQuery } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { FloatingNav, BottomNav } from 'components';
+import { DesktopNavigation, MobileDeviceNavigation } from 'components';
 import { useLocation } from 'react-router-dom';
 import { Routes } from 'config';
 
@@ -41,8 +41,7 @@ export const DefaultLayout: React.FC = ({ children }) => {
             matchesHome.test(location.pathname) ? classes.main : classes.desktop
           }
         >
-          <>{children}</>
-          <FloatingNav />
+          <DesktopNavigation>{children}</DesktopNavigation>
         </Container>
       </>
     );
@@ -51,8 +50,11 @@ export const DefaultLayout: React.FC = ({ children }) => {
   return (
     <>
       <Container maxWidth="lg" className={classes.mobile}>
-        <>{children}</>
-        {matchesDownMd ? <BottomNav /> : null}
+        {matchesDownMd ? (
+          <MobileDeviceNavigation>{children}</MobileDeviceNavigation>
+        ) : (
+          <>{children}</>
+        )}
       </Container>
     </>
   );

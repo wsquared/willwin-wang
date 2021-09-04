@@ -1,12 +1,12 @@
 import React from 'react';
 import { fireEvent, waitFor } from '@testing-library/react';
-import { BottomNav } from './BottomNav';
+import { MobileDeviceNavigation } from './MobileDeviceNavigation';
 import { renderTestComponent, createMatchMedia } from 'common';
 import { Routes } from 'config';
 
 jest.mock('react-ga');
 
-describe('Given BottomNav', () => {
+describe('Given MobileDeviceNavigation', () => {
   let matchMedia: ((query: string) => MediaQueryList) &
     ((query: string) => MediaQueryList);
 
@@ -21,7 +21,7 @@ describe('Given BottomNav', () => {
 
   describe('When I click on home', () => {
     it('should route to home', () => {
-      const { getByText } = renderTestComponent(<BottomNav />);
+      const { getByText } = renderTestComponent(<MobileDeviceNavigation />);
 
       fireEvent.click(getByText(/home/i));
 
@@ -31,7 +31,7 @@ describe('Given BottomNav', () => {
 
   describe('When I click on about', () => {
     it('should route to about', () => {
-      const { getByText } = renderTestComponent(<BottomNav />);
+      const { getByText } = renderTestComponent(<MobileDeviceNavigation />);
 
       fireEvent.click(getByText(/about/i));
 
@@ -41,7 +41,7 @@ describe('Given BottomNav', () => {
 
   describe('When I click on portfolio', () => {
     it('should route to portfolio', () => {
-      const { getByText } = renderTestComponent(<BottomNav />, {
+      const { getByText } = renderTestComponent(<MobileDeviceNavigation />, {
         route: Routes.portfolio,
       });
 
@@ -53,7 +53,7 @@ describe('Given BottomNav', () => {
 
   describe('When I click on contact', () => {
     it('should route to contact', () => {
-      const { getByText } = renderTestComponent(<BottomNav />, {
+      const { getByText } = renderTestComponent(<MobileDeviceNavigation />, {
         route: Routes.portfolio,
       });
 

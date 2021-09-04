@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { ReactNode, useEffect } from 'react';
+import { IconButton } from '@material-ui/core';
 import { ArrowBackOutlined, ArrowForwardOutlined } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -7,7 +8,7 @@ import { DoubleLinkedListNode } from 'common';
 import { useTranslate } from 'hooks';
 import ReactGA from 'react-ga';
 
-export const FloatingNav: React.FC = () => {
+const DesktopNavigation: React.FC<{ children: ReactNode }> = ({ children }) => {
   const history = useHistory();
 
   const useStyles = makeStyles({
@@ -47,7 +48,7 @@ export const FloatingNav: React.FC = () => {
     return cache;
   };
 
-  const routesMap = buildDoubleLinkedListNodes([
+  const routesCache = buildDoubleLinkedListNodes([
     Routes.home,
     Routes.about,
     Routes.portfolio,
@@ -58,7 +59,7 @@ export const FloatingNav: React.FC = () => {
 
   const translate = useTranslate();
 
-  const currentRouteNode = routesMap.get(
+  const currentRouteNode = routesCache.get(
     history.location.pathname === '/' ? Routes.home : history.location.pathname
   );
 
@@ -105,18 +106,32 @@ export const FloatingNav: React.FC = () => {
   });
 
   return (
-    <div>
-      <ArrowBackOutlined
-        titleAccess={translate('backArrow')}
+    <>
+      <IconButton
         className={classes.arrowLeft}
+        aria-label={translate('backArrow')}
+        size={'medium'}
         onClick={handleClickLeft}
-      />
-
-      <ArrowForwardOutlined
-        titleAccess={translate('forwardArrow')}
+      >
+        <ArrowBackOutlined
+          titleAccess={translate('backArrow')}
+          className={classes.arrowLeft}
+        />
+      </IconButton>
+      {children}
+      <IconButton
         className={classes.arrowRight}
+        aria-label={translate('forwardArrow')}
+        size={'medium'}
         onClick={handleClickRight}
-      />
-    </div>
+      >
+        <ArrowForwardOutlined
+          titleAccess={translate('forwardArrow')}
+          className={classes.arrowRight}
+        />
+      </IconButton>
+    </>
   );
 };
+
+export { DesktopNavigation };

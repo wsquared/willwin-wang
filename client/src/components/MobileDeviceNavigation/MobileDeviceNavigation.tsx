@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import {
   BottomNavigation,
   BottomNavigationAction,
@@ -9,7 +9,9 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { useTranslate } from 'hooks';
 import ReactGA from 'react-ga';
 
-const BottomNav: React.FC = () => {
+const MobileDeviceNavigation: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
   const useStyles = makeStyles({
     root: {
       width: '100%',
@@ -45,33 +47,36 @@ const BottomNav: React.FC = () => {
   };
 
   return (
-    <BottomNavigation
-      value={value}
-      className={classes.root}
-      onChange={handleChange}
-    >
-      <BottomNavigationAction
-        label={translate('home')}
-        value="home"
-        icon={<Home />}
-      />
-      <BottomNavigationAction
-        label={translate('about')}
-        value="about"
-        icon={<Person />}
-      />
-      <BottomNavigationAction
-        label={translate('portfolio')}
-        value="portfolio"
-        icon={<Folder />}
-      />
-      <BottomNavigationAction
-        label={translate('contact')}
-        value="contact"
-        icon={<ContactMail />}
-      />
-    </BottomNavigation>
+    <>
+      {children}
+      <BottomNavigation
+        value={value}
+        className={classes.root}
+        onChange={handleChange}
+      >
+        <BottomNavigationAction
+          label={translate('home')}
+          value="home"
+          icon={<Home />}
+        />
+        <BottomNavigationAction
+          label={translate('about')}
+          value="about"
+          icon={<Person />}
+        />
+        <BottomNavigationAction
+          label={translate('portfolio')}
+          value="portfolio"
+          icon={<Folder />}
+        />
+        <BottomNavigationAction
+          label={translate('contact')}
+          value="contact"
+          icon={<ContactMail />}
+        />
+      </BottomNavigation>
+    </>
   );
 };
 
-export { BottomNav };
+export { MobileDeviceNavigation };
